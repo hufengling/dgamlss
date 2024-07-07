@@ -1,3 +1,31 @@
+#' Local Site:
+#'
+#' @param formula
+#' @param sigma.formula
+#' @param nu.formula
+#' @param tau.formula
+#' @param family
+#' @param data
+#' @param weights
+#' @param contrasts
+#' @param method
+#' @param start.from
+#' @param mu.start
+#' @param sigma.start
+#' @param nu.start
+#' @param tau.start
+#' @param mu.fix
+#' @param sigma.fix
+#' @param nu.fix
+#' @param tau.fix
+#' @param control
+#' @param i.control
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 gamlss_mock_fit <- function(formula = formula(data),
                             sigma.formula = ~1,
                             nu.formula = ~1,

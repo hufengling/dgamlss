@@ -1,4 +1,4 @@
-#' Select optimal lambda using GAIC
+#' Central site: Select optimal lambda using GAIC
 #'
 #' @param lambda_vec Vector of lambda values
 #' @param proposed_coef_list List of fitted coefficients for each lambda value. Length must be equal to length(lambda_vec). Output from dgamlss_aggregate_coef()
@@ -23,7 +23,10 @@ dgamlss_select_lambda <- function(lambda_vec,
                                   site_ssr_list,
                                   site_xtx_list,
                                   penalty_matrix,
+                                  method = c("GAIC", "GCV"),
+                                  pooled_n = NULL,
                                   k = 2) {
+  method <- match.arg()
   if (is.null(site_xtx_list)) {
     stop("If a penalty is being used, xtx_site_list must be supplied in order to estimate effective degrees of freedom for each given lambda. Please run dgamlss_get_inference() one time at local sites -- xtx_site_list will not change between communication rounds and therefore does not need to be updated.")
   }
@@ -32,16 +35,24 @@ dgamlss_select_lambda <- function(lambda_vec,
   site_ssr_df <- do.call(rbind, site_ssr_list)
 
   edf_vec <- numeric(length(lambda_vec))
-  gaic_vec <- numeric(length(lambda_vec))
+  criteria_vec <- numeric(length(lambda_vec))
   for (i in 1:length(lambda_vec)) {
     edf_vec[i] <- sum(diag(solve(xtx + lambda_vec[[i]] * penalty_matrix) %*% xtx))
-    gaic_vec[i] <- sum(site_ssr_df[, i]) + k * edf_vec[i]
+    if (method == "GAIC") {
+      criteria_vec[i] <- sum(site_ssr_df[, i]) + k * edf_vec[i]
+    }
+    if (method == "GCV") {
+      if (is.null(pooled_n)) {
+        stop("Must provide pooled_n to use GCV.")
+      }
+      criteria_vec[i] <- sum(site_ssr_df[, i]) * pooled_n / (pooled_n - edf_vec[i])^2
+    }
   }
 
-  optimal_index <- which.min(gaic_vec)
+  optimal_index <- which.min(criteria_vec)
 
   return(list(lambda_opt = lambda_vec[optimal_index],
-              gaic_opt = gaic_vec[optimal_index],
+              gaic_opt = criteria_vec[optimal_index],
               edf_opt = edf_vec[optimal_index],
               index = optimal_index))
 }

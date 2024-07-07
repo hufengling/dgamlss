@@ -1,4 +1,4 @@
-#' Check convergence of GAMLSS model updates
+#' Central site: Check convergence of GAMLSS model updates
 #'
 #' @param current_update List containing current model coefficients. Note that the current_update list must have an item with name to.update that specifies which coefficients to check for convergence.
 #' @param previous_update List containing previous model coefficients.

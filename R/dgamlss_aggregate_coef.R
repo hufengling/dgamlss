@@ -1,4 +1,4 @@
-#' Aggregate local site data into pooled coefficient update.
+#' Central site: Aggregate local site data into pooled coefficient update.
 #'
 #' @param site_list List of sumarry statistic updates from local sites.
 #' @param fixed_lambda If fixed penalty smooth is desired, can provide one fixed lambda. Default NULL to allow for empirical estimation of optimal lambda.
@@ -6,7 +6,7 @@
 #' @param search_type Options for fine or coarse grid of lambdas to check around the central_lambda.
 #' @param penalty_matrix Penalty matrix for the given parameter being fit.
 #'
-#' @return List of new coefficient update as well as global deviance calculated at the previous coefficient. Note that global deviance is "lagged" by one communication round.
+#' @return Communication object: List of new coefficient update as well as global deviance calculated at the previous coefficient. Note that global deviance is "lagged" by one communication round.
 #' @export
 #'
 #' @examples

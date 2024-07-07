@@ -1,4 +1,4 @@
-#' Aggregate inference across sites
+#' Central site: Aggregate inference across sites
 #'
 #' @param site_list List of joined outputs from dgamlss_aggregate_inference
 #' @param pooled_coefs Named list of final pooled coefficients. Names must be "mu", "sigma", "nu", "tau".

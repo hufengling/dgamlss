@@ -1,4 +1,4 @@
-#' Create summary object for distributed GAMLSS model
+#' Central site: Create summary object for distributed GAMLSS model
 #'
 #' @param local_gamlss A GAMLSS object with the same function call as the global model, but created using local site data. Used to pull function call information created by the GAMLSS object.
 #' @param pooled_coefs A list containing pooled coefficients for model parameters.
@@ -19,8 +19,6 @@
 #'
 #' final_coef_list <- list(mu.coef = c(10, 1, 2), sigma.coef = c(4, 3),
 #' nu.coef = 2, tau.coef = 3) # Declared based on series of last_updates
-#' pooled_coefs <- dgamlss_pooled_coefs(current_coef_list, n_communications,
-#' last_update$deviance)
 #' summary_object <- dgamlss_create_summary(site1_gamlss, pooled_coefs,
 #' pooled_hess, pooled_n)
 #' dgamlss_summary(summary_object)

@@ -1,4 +1,4 @@
-#' Generate B-spline basis matrix
+#' Local site: Generate B-spline basis matrix
 #'
 #' @param x The vector of input values from the local site.
 #' @param x_min The pooled minimum value of x across all sites.
@@ -11,7 +11,7 @@
 #' @param orthogonalize Whether to get spline representation where intercept is orthogonal to the non-linear representations. Can only be used with fixed effect splines or fixed penalty splines. Cannot be used with empirically penalized splines.
 #'
 #' @importFrom splines splineDesign
-#' @return A design matrix containing the B-spline basis functions evaluated at the input values.
+#' @return A design matrix containing the B-spline basis functions evaluated at the input values. Communication object: Send "all_knots" attribute to local site to use as "knot_positions". Or send all arguments passed, other than x.
 #' @export
 #'
 #' @examples

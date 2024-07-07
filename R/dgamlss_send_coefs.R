@@ -1,4 +1,4 @@
-#' Send pooled coefficients
+#' Central site: Send pooled coefficients
 #'
 #' @param to_update One of "mu", "sigma", "nu", "tau" specifying which parameter the local sites should send relevant summary statitics back for.
 #' @param mu.coef Vector of current pooled mu coefficients
@@ -6,7 +6,7 @@
 #' @param nu.coef Vector of current pooled nu coefficients
 #' @param tau.coef Vector of current pooled tau coefficients
 #'
-#' @return List of pooled coefficients that can be used with dgamlss_RS
+#' @return Communication object: List of pooled coefficients that can be used with dgamlss_RS
 #' @export
 #'
 #' @examples

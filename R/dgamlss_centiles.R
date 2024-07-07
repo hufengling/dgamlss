@@ -1,4 +1,4 @@
-#' Plot GAMLSS centiles
+#' Central site: Plot GAMLSS centiles
 #'
 #' @param obj See GAMLSS centiles() function.
 #' @param x_val See GAMLSS centiles() function. If centile estimates are jagged, this may be due to inclusion of categorical variables in the GAMLSS models. Jaggedness can be corrected by replacing obj$mu.fv, obj$sigma.fv, obj$nu.fv, obj$tau.fv values with predictions under a single category.

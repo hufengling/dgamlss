@@ -1,4 +1,4 @@
-#' dgamlss analog of the gamlss() function
+#' Local site: dgamlss analog of the gamlss() function
 #'
 #' @param formula mu formula
 #' @param sigma.formula sigma formula
@@ -19,7 +19,7 @@
 #' @import gamlss.data
 #' @import survival
 #' @importFrom methods is
-#' @return Summary statistics for the site that should be sent to the coordinating site. Coordinating site can aggregate dgamlss_RS outputs using dgamlss_aggregate_coef()
+#' @return Communication object: Summary statistics for the site that should be sent to the central site. Central site can aggregate dgamlss_RS outputs using dgamlss_aggregate_coef()
 #' @export
 #'
 #' @examples

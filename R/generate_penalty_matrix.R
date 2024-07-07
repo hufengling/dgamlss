@@ -1,3 +1,13 @@
+#' Central Site:
+#'
+#' @param local_object
+#' @param smooth_penalty_list
+#' @param smooth_index_list
+#'
+#' @return
+#' @export
+#'
+#' @examples
 generate_penalty_matrix <- function(local_object,
                                       smooth_penalty_list,
                                       smooth_index_list) {

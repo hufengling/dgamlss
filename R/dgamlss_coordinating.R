@@ -51,11 +51,12 @@ dgamlss_coordinating <- function(mu.formula,
                                  lambda_list = NULL,
                                  penalty_matrix_list = NULL,
                                  is_orthogonal = FALSE,
+                                 basis_sizes = NULL,
                                  verbose = FALSE,
                                  ...) {
   # Return one site ==========
   return_one_site <- function(site, update,
-                              get_ssr = FALSE,
+                              get_penalty_metric = FALSE,
                               proposed_coef_list = NULL) {
     dgamlss_RS(formula = formula(mu.formula),
                sigma.formula = formula(sigma.formula),
@@ -65,7 +66,7 @@ dgamlss_coordinating <- function(mu.formula,
                weights = weights,
                data = site,
                dgamlss.update = update,
-               get_ssr = get_ssr,
+               get_penalty_metric = get_penalty_metric,
                proposed_coef_list = proposed_coef_list,
                ...)
   }
@@ -75,17 +76,18 @@ dgamlss_coordinating <- function(mu.formula,
   n_reduced <- -1
 
   inits <- dgamlss_get_inits(mu.formula,
-                              sigma.formula,
-                              nu.formula,
-                              tau.formula,
-                              family = NO(),
-                              weights,
-                              contrasts,
-                              local_site_data,
-                              all_inits,
-                              penalty_matrix_list,
-                              is_orthogonal,
-                              verbose, ...)
+                             sigma.formula,
+                             nu.formula,
+                             tau.formula,
+                             family,
+                             weights,
+                             contrasts,
+                             local_site_data,
+                             all_inits,
+                             penalty_matrix_list,
+                             is_orthogonal,
+                             basis_sizes,
+                             verbose, ...)
   # edf_to_get <- names(penalty_matrix_list)
   # edf_list <- list()
 

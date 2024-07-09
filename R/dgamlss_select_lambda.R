@@ -45,7 +45,7 @@ dgamlss_select_lambda <- function(lambda_vec,
       if (is.null(pooled_n)) {
         stop("Must provide pooled_n to use GCV.")
       }
-      criteria_vec[i] <- sum(site_ssr_df[, i]) * pooled_n / (pooled_n - edf_vec[i])^2
+      criteria_vec[i] <- sum(site_ssr_df[, i]) / (1 - edf_vec[i] / pooled_n)^2
     }
   }
 

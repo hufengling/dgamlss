@@ -27,7 +27,8 @@ dgamlss_create_summary <- function(local_gamlss,
                                    pooled_coefs,
                                    global_deviance,
                                    pooled_inference,
-                                   spline_prefix = NULL) {
+                                   spline_prefix = NULL,
+                                   is_orthogonal = FALSE) {
   dgamlss_calculate_vcov <- function(pooled_coefs, pooled_hessian) {
     coefs <- pooled_coefs$mu_coefs
 
@@ -126,6 +127,8 @@ dgamlss_create_summary <- function(local_gamlss,
     })
     summary_out$spline_prefix <- spline_prefix
   }
+
+  summary_out$is_orthogonal <- is_orthogonal
 
   return(summary_out)
 }

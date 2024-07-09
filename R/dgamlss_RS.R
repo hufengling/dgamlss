@@ -11,8 +11,8 @@
 #' @param dgamlss.update Current update from dgamlss_send_coefs()
 #' @param control See gamlss() function.
 #' @param i.control See gamlss() function.
-#' @param get_ssr Get sum of squared residuals for empirical penalty selection. Only useful for penalized smooth term fitting, after getting a set of proposed coefficients under various penalties. Default FALSE.
-#' @param proposed_coef_list List of proposed coefficients across a grid of lambda penalties, sent from coordinating site. Use with get_ssr = TRUE.
+#' @param get_penalty_metric Get penalty metric for empirical penalty selection for GCV or GAIC. Options are GCV or GAIC. Only useful for penalized smooth term fitting, after getting a set of proposed coefficients under various penalties. Default NULL.
+#' @param proposed_coef_list List of proposed coefficients across a grid of lambda penalties, sent from central site. Use with get_penalty_metric = GCV or get_penalty_metric = GAIC
 #'
 #' @import gamlss
 #' @import gamlss.dist
@@ -47,7 +47,7 @@ dgamlss_RS <- function(formula = formula(data),
                        weights = NULL, # for weighted likelihood analysis
                        contrasts = NULL, # one type of contrasts for all parameters
                        dgamlss.update = dgamlss.update(),
-                       get_ssr = FALSE,
+                       get_penalty_metric = NULL,
                        proposed_coef_list = NULL,
                        control = gamlss.control(),
                        i.control = glim.control()) {# the inner circle control (GLIM)
@@ -153,14 +153,18 @@ dgamlss_RS <- function(formula = formula(data),
         stop("Inf values in the working vector or weights for parameter ", names(formals(family$valid)), "\n")
       }
 
-      if (get_ssr) {
-        ssr_vec <- unlist(lapply(proposed_coef_list, \(coefs) {
+      if (!is.null(get_penalty_metric)) {
+        if (get_penalty_metric != FALSE) {
+          ssr_vec <- unlist(lapply(proposed_coef_list, \(coefs) {
           new_fitted <- family$linkinv(X %*% coefs + offset)
-          # return(sum(diag(w_matrix) * weights * family$G.di(new_fitted)))
-          return(sum(diag(w_matrix) * weights * (working_values - family$linkfun(new_fitted))^2))
+          if (get_penalty_metric == "GAIC")
+            return(sum(diag(w_matrix) * weights * family$G.di(new_fitted)))
+          if (get_penalty_metric == "GCV")
+            return(sum(diag(w_matrix) * weights * (working_values - family$linkfun(new_fitted))^2))
         }))
 
         return(ssr_vec)
+        }
       }
 
       individual_deviances <- family$G.di(fitted) # deviance increment
@@ -427,14 +431,17 @@ dgamlss_RS <- function(formula = formula(data),
     tau <- family$tau.linkinv(tau.X %*% dgamlss.update$tau.coef + tau.offset)
   }
 
-  ## Check conditions for get_ssr
-  if (get_ssr) {
-    if (is.null(proposed_coef_list)) {
-      stop("Must provide proposed_coef_list in order to get sums of squared residuals")
+  ## Check conditions for get_penalty_metric
+  if (!is.null(get_penalty_metric)) {
+    if (get_penalty_metric != FALSE) {
+      get_penalty_metric <- match.arg(get_penalty_metric, c("GAIC", "GCV"))
+      if (is.null(proposed_coef_list)) {
+        stop("Must provide proposed_coef_list in order to get sums of squared residuals")
+      }
     }
   } else {
     if (!is.null(proposed_coef_list)) {
-      warning("proposed_coef_list is provided, but get_ssr = FALSE. Ignoring proposed_coef_list.")
+      warning("proposed_coef_list is provided, but get_penalty_metric = NULL. Ignoring proposed_coef_list.")
     }
   }
   ##  Start RS algorithm ================================

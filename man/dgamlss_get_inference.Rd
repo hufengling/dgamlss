@@ -2,7 +2,7 @@
 % Please edit documentation in R/dgamlss_get_inference.R
 \name{dgamlss_get_inference}
 \alias{dgamlss_get_inference}
-\title{Title}
+\title{Local site: Get local Hessian, X^TX matrices, and local sample size for distributed inference tasks.}
 \usage{
 dgamlss_get_inference(
   local_object,
@@ -18,10 +18,10 @@ dgamlss_get_inference(
 \item{pooled_coefs}{Named list of final pooled coefficients. Names must be "mu", "sigma", "nu", "tau".}
 }
 \value{
-List containing local Hessian, local X^TX matrix for relevant penalized parameters, and local sample size.
+Communication object: List containing local Hessian, local X^TX matrix for relevant penalized parameters, and local sample size.
 }
 \description{
-Title
+Local site: Get local Hessian, X^TX matrices, and local sample size for distributed inference tasks.
 }
 \examples{
 \dontrun{

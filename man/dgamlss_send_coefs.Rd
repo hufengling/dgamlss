@@ -2,7 +2,7 @@
 % Please edit documentation in R/dgamlss_send_coefs.R
 \name{dgamlss_send_coefs}
 \alias{dgamlss_send_coefs}
-\title{Send pooled coefficients}
+\title{Central site: Send pooled coefficients}
 \usage{
 dgamlss_send_coefs(
   to_update,
@@ -24,10 +24,10 @@ dgamlss_send_coefs(
 \item{tau.coef}{Vector of current pooled tau coefficients}
 }
 \value{
-List of pooled coefficients that can be used with dgamlss_RS
+Communication object: List of pooled coefficients that can be used with dgamlss_RS
 }
 \description{
-Send pooled coefficients
+Central site: Send pooled coefficients
 }
 \examples{
 \dontrun{

@@ -5,6 +5,8 @@
 #' @param site_ssr_list List of vectors of sum of squared residuals for each site for each lambda value. Length of site_ssr_list should be equal to number of sites. Length of SSR vectors within site_ssr_list should be length(lambda_vec). Output from dgamlss_RS() with get_ssr = TRUE.
 #' @param site_xtx_list List of X^TX matrix for the given parameter from each site. Length of site_xtx_list should be equal to number of sites. Output from dgamlss_get_inference() with pooled_coefs = NULL.
 #' @param penalty_matrix Penalty matrix for the given parameter. Length of each side of penalty matrix should be equal to number of coefficients for that parameter. Same size as X^TX. Output from generate_penalty_matrix().
+#' @param method Option for which method to use for automated penalty selection. Recommended "GCV", though standard GAMLSS recommends "GAIC".
+#' @param pooled_n Total n across all sites.
 #' @param k GAIC multiplier. Default is k = 2 for standard AIC. BIC is k = ln(n)
 #'
 #' @return List of optimal lambda for the given update along with corresponding GAIC and effective degrees of freedom (EDF)
@@ -23,10 +25,10 @@ dgamlss_select_lambda <- function(lambda_vec,
                                   site_ssr_list,
                                   site_xtx_list,
                                   penalty_matrix,
-                                  method = c("GAIC", "GCV"),
+                                  method = c("GCV", "GAIC"),
                                   pooled_n = NULL,
                                   k = 2) {
-  method <- match.arg()
+  method <- match.arg(method, c("GCV", "GAIC"))
   if (is.null(site_xtx_list)) {
     stop("If a penalty is being used, xtx_site_list must be supplied in order to estimate effective degrees of freedom for each given lambda. Please run dgamlss_get_inference() one time at local sites -- xtx_site_list will not change between communication rounds and therefore does not need to be updated.")
   }

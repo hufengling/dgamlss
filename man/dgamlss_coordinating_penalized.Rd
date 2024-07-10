@@ -2,7 +2,7 @@
 % Please edit documentation in R/dgamlss_coordinating_penalized.R
 \name{dgamlss_coordinating_penalized}
 \alias{dgamlss_coordinating_penalized}
-\title{Simulation coordinating function for distributed GAMLSS model fitting}
+\title{Simulation: End-to-end coordinating function for distributed GAMLSS model fitting with automated penalty selection.}
 \usage{
 dgamlss_coordinating_penalized(
   mu.formula,
@@ -18,8 +18,10 @@ dgamlss_coordinating_penalized(
   coef_crit = 0.01,
   lambda_list = NULL,
   penalty_matrix_list = NULL,
+  method = c("GAIC", "GCV"),
   k = 2,
   is_orthogonal = FALSE,
+  basis_sizes = NULL,
   verbose = FALSE,
   ...
 )
@@ -39,7 +41,7 @@ dgamlss_coordinating_penalized(
 
 \item{contrasts}{Optional contrasts for model parameters.}
 
-\item{local_site_data}{Data from coordinating site. Used to set up initial values for some GAMLSS distributions.}
+\item{local_site_data}{Data from central site. Used to set up initial values for some GAMLSS distributions.}
 
 \item{site_data}{List of data frames containing local datasets.}
 
@@ -51,21 +53,25 @@ dgamlss_coordinating_penalized(
 
 \item{penalty_matrix_list}{Named list of penalty matrices, output from dgamlss_bs(). Names must be "mu", "sigma", "nu", and "tau".}
 
+\item{method}{Option to use either GAIC or GCV for automated penalty selection.}
+
 \item{k}{GAIC multiplier for automated penalty selection. AIC uses k = 2. BIC uses k = log(n). Higher k corresponds to stronger penalty.}
 
 \item{is_orthogonal}{TRUE/FALSE indicator of whether the dgamlss_bs() output was orthogonalized or not.}
+
+\item{basis_sizes}{Vector of number of basis functions for each spline. Must be length 4.}
 
 \item{verbose}{TRUE/FALSE for verbosity.}
 
 \item{...}{Additional arguments to be passed to the underlying GAMLSS fitting function.
 
-Simulates dgamlss fitting between a coordinating site and all local sites. Only summary statistics are passed from local sites. The coordinating site then aggregates local summary statistics and sends back pooled updates.}
+Simulates dgamlss fitting between a central site and all local sites. Only summary statistics are passed from local sites. The central site then aggregates local summary statistics and sends back pooled updates.}
 }
 \value{
 A list containing pooled coefficients, number of communications, number of reduced updates, and global deviance.
 }
 \description{
-Simulation coordinating function for distributed GAMLSS model fitting
+Simulation: End-to-end coordinating function for distributed GAMLSS model fitting with automated penalty selection.
 }
 \examples{
 

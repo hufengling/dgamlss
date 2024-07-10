@@ -2,7 +2,7 @@
 % Please edit documentation in R/dgamlss_summary.R
 \name{dgamlss_summary}
 \alias{dgamlss_summary}
-\title{Produce summary of dgamlss_create_summary() output, similar to summary.gamlss()}
+\title{Central Site: Produce summary of dgamlss_create_summary() output, similar to summary.gamlss()}
 \usage{
 dgamlss_summary(object, save = FALSE, digits = max(3, getOption("digits") - 3))
 }
@@ -17,7 +17,7 @@ dgamlss_summary(object, save = FALSE, digits = max(3, getOption("digits") - 3))
 Summary printout
 }
 \description{
-Produce summary of dgamlss_create_summary() output, similar to summary.gamlss()
+Central Site: Produce summary of dgamlss_create_summary() output, similar to summary.gamlss()
 }
 \examples{
 \dontrun{
@@ -29,8 +29,6 @@ pooled_hess <- dgamlss_aggregate_hessian(list(site1_hess, site2_hess))
 
 final_coef_list <- list(mu.coef = c(10, 1, 2), sigma.coef = c(4, 3),
 nu.coef = 2, tau.coef = 3) # Declared based on series of last_updates
-pooled_coefs <- dgamlss_pooled_coefs(current_coef_list, n_communications,
-last_update$deviance)
 summary_object <- dgamlss_create_summary(site1_gamlss, pooled_coefs,
 pooled_hess, pooled_n)
 dgamlss_summary(summary_object)

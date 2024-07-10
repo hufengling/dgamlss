@@ -2,7 +2,7 @@
 % Please edit documentation in R/dgamlss_create_summary.R
 \name{dgamlss_create_summary}
 \alias{dgamlss_create_summary}
-\title{Create summary object for distributed GAMLSS model}
+\title{Central site: Create summary object for distributed GAMLSS model}
 \usage{
 dgamlss_create_summary(
   local_gamlss,
@@ -27,7 +27,7 @@ dgamlss_create_summary(
 A summary object of the distributed GAMLSS model which can be run through dgamlss_summary() and dgamlss_fitted_plot()
 }
 \description{
-Create summary object for distributed GAMLSS model
+Central site: Create summary object for distributed GAMLSS model
 }
 \examples{
 \dontrun{
@@ -39,8 +39,6 @@ pooled_hess <- dgamlss_aggregate_hessian(list(site1_hess, site2_hess))
 
 final_coef_list <- list(mu.coef = c(10, 1, 2), sigma.coef = c(4, 3),
 nu.coef = 2, tau.coef = 3) # Declared based on series of last_updates
-pooled_coefs <- dgamlss_pooled_coefs(current_coef_list, n_communications,
-last_update$deviance)
 summary_object <- dgamlss_create_summary(site1_gamlss, pooled_coefs,
 pooled_hess, pooled_n)
 dgamlss_summary(summary_object)

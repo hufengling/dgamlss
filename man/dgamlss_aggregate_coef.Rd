@@ -2,7 +2,7 @@
 % Please edit documentation in R/dgamlss_aggregate_coef.R
 \name{dgamlss_aggregate_coef}
 \alias{dgamlss_aggregate_coef}
-\title{Aggregate local site data into pooled coefficient update.}
+\title{Central site: Aggregate local site data into pooled coefficient update.}
 \usage{
 dgamlss_aggregate_coef(
   site_list,
@@ -24,10 +24,10 @@ dgamlss_aggregate_coef(
 \item{penalty_matrix}{Penalty matrix for the given parameter being fit.}
 }
 \value{
-List of new coefficient update as well as global deviance calculated at the previous coefficient. Note that global deviance is "lagged" by one communication round.
+Communication object: List of new coefficient update as well as global deviance calculated at the previous coefficient. Note that global deviance is "lagged" by one communication round.
 }
 \description{
-Aggregate local site data into pooled coefficient update.
+Central site: Aggregate local site data into pooled coefficient update.
 }
 \examples{
 # To update the "mu" coefficients

@@ -14,13 +14,16 @@
 #' @param local_site_data Data from central site. Used to set up initial values for some GAMLSS distributions.
 #' @param lambda_list Named list of fixed lambdas, if fixed penalty smooth terms are desired. Names must be "mu", "sigma", "nu", and "tau".
 #' @param penalty_matrix_list Named list of penalty matrices, output from dgamlss_bs(). Names must be "mu", "sigma", "nu", and "tau".
+#' @param basis_sizes Vector of number of basis functions for each spline. Must be length 4.
 #' @param is_orthogonal TRUE/FALSE indicator of whether the dgamlss_bs() output was orthogonalized or not.
+
 #' @param verbose TRUE/FALSE for verbosity.
 #'
 #' Simulates dgamlss fitting between a central site and all local sites. Only summary statistics are passed from local sites. The central site then aggregates local summary statistics and sends back pooled updates.
 
 #'
 #' @import gamlss
+#' @importFrom stats formula
 #' @return A list containing pooled coefficients, number of communications, number of reduced updates, and global deviance.
 #' @export
 #'

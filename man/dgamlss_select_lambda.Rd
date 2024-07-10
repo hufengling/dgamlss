@@ -2,7 +2,7 @@
 % Please edit documentation in R/dgamlss_select_lambda.R
 \name{dgamlss_select_lambda}
 \alias{dgamlss_select_lambda}
-\title{Select optimal lambda using GAIC}
+\title{Central site: Select optimal lambda using GAIC}
 \usage{
 dgamlss_select_lambda(
   lambda_vec,
@@ -10,6 +10,8 @@ dgamlss_select_lambda(
   site_ssr_list,
   site_xtx_list,
   penalty_matrix,
+  method = c("GCV", "GAIC"),
+  pooled_n = NULL,
   k = 2
 )
 }
@@ -24,13 +26,17 @@ dgamlss_select_lambda(
 
 \item{penalty_matrix}{Penalty matrix for the given parameter. Length of each side of penalty matrix should be equal to number of coefficients for that parameter. Same size as X^TX. Output from generate_penalty_matrix().}
 
+\item{method}{Option for which method to use for automated penalty selection. Recommended "GCV", though standard GAMLSS recommends "GAIC".}
+
+\item{pooled_n}{Total n across all sites.}
+
 \item{k}{GAIC multiplier. Default is k = 2 for standard AIC. BIC is k = ln(n)}
 }
 \value{
 List of optimal lambda for the given update along with corresponding GAIC and effective degrees of freedom (EDF)
 }
 \description{
-Select optimal lambda using GAIC
+Central site: Select optimal lambda using GAIC
 }
 \examples{
 \dontrun{

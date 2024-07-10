@@ -4,6 +4,7 @@
 #' @param save to save. Default FALSE
 #' @param digits Default 3
 #'
+#' @importFrom stats printCoefmat
 #' @return Summary printout
 #' @export
 #'

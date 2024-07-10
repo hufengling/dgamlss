@@ -2,7 +2,7 @@
 % Please edit documentation in R/dgamlss_RS.R
 \name{dgamlss_RS}
 \alias{dgamlss_RS}
-\title{dgamlss analog of the gamlss() function}
+\title{Local site: dgamlss analog of the gamlss() function}
 \usage{
 dgamlss_RS(
   formula = formula(data),
@@ -13,8 +13,8 @@ dgamlss_RS(
   data,
   weights = NULL,
   contrasts = NULL,
-  dgamlss.update = dgamlss.update(),
-  get_ssr = FALSE,
+  dgamlss.update,
+  get_penalty_metric = NULL,
   proposed_coef_list = NULL,
   control = gamlss.control(),
   i.control = glim.control()
@@ -39,19 +39,19 @@ dgamlss_RS(
 
 \item{dgamlss.update}{Current update from dgamlss_send_coefs()}
 
-\item{get_ssr}{Get sum of squared residuals for empirical penalty selection. Only useful for penalized smooth term fitting, after getting a set of proposed coefficients under various penalties. Default FALSE.}
+\item{get_penalty_metric}{Get penalty metric for empirical penalty selection for GCV or GAIC. Options are GCV or GAIC. Only useful for penalized smooth term fitting, after getting a set of proposed coefficients under various penalties. Default NULL.}
 
-\item{proposed_coef_list}{List of proposed coefficients across a grid of lambda penalties, sent from coordinating site. Use with get_ssr = TRUE.}
+\item{proposed_coef_list}{List of proposed coefficients across a grid of lambda penalties, sent from central site. Use with get_penalty_metric = GCV or get_penalty_metric = GAIC}
 
 \item{control}{See gamlss() function.}
 
 \item{i.control}{See gamlss() function.}
 }
 \value{
-Summary statistics for the site that should be sent to the coordinating site. Coordinating site can aggregate dgamlss_RS outputs using dgamlss_aggregate_coef()
+Communication object: Summary statistics for the site that should be sent to the central site. Central site can aggregate dgamlss_RS outputs using dgamlss_aggregate_coef()
 }
 \description{
-dgamlss analog of the gamlss() function
+Local site: dgamlss analog of the gamlss() function
 }
 \examples{
 \dontrun{

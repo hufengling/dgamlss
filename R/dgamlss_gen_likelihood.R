@@ -16,6 +16,11 @@
 # vii) what happends if x+pb(x) or
 #-------------------------------------------------------------------------------
 #-------------------------------------------------------------------------------
+#' GAMLSS generate likelihood. Hidden function
+#'
+#' @param object Output from gamlss() run on central site
+#'
+#' @return Likelihood function
 dgamlss_gen_likelihood <- function(object) {
   if (!is.gamlss(object)) stop("needs a gamlss object")
   #    fam <- as.gamlss.family(object$family) this is changed to get the right link functions

@@ -2,27 +2,63 @@
 % Please edit documentation in R/dgamlss_get_inits.R
 \name{dgamlss_get_inits}
 \alias{dgamlss_get_inits}
-\title{Get initial values based on running gamlss on the coordinating site data.}
+\title{Central site: Get initial values based on running gamlss on the central site data.}
 \usage{
-dgamlss_get_inits(local_gamlss)
+dgamlss_get_inits(
+  mu.formula,
+  sigma.formula = "~ 1",
+  nu.formula = "~ 1",
+  tau.formula = "~ 1",
+  family = NO(),
+  weights = NULL,
+  contrasts = NULL,
+  local_site_data,
+  all_inits = NULL,
+  penalty_matrix_list = NULL,
+  is_orthogonal = FALSE,
+  basis_sizes = NULL,
+  verbose = FALSE,
+  ...
+)
 }
 \arguments{
-\item{local_gamlss}{gamlss output from local site}
+\item{mu.formula}{Formula for the mu component of the GAMLSS model.}
+
+\item{sigma.formula}{Formula for the sigma component of the GAMLSS model.}
+
+\item{nu.formula}{Formula for the nu component of the GAMLSS model.}
+
+\item{tau.formula}{Formula for the tau component of the GAMLSS model.}
+
+\item{family}{GAMLSS family object specifying the distribution and link functions.}
+
+\item{weights}{Optional weights for likelihood analysis.}
+
+\item{contrasts}{Optional contrasts for model parameters.}
+
+\item{local_site_data}{Data from central site. Used to set up initial values for some GAMLSS distributions.}
+
+\item{all_inits}{Optional named list containing initial values for all coefficients.}
+
+\item{penalty_matrix_list}{Named list of penalty matrices, output from dgamlss_bs(). Names must be "mu", "sigma", "nu", and "tau".}
+
+\item{is_orthogonal}{TRUE/FALSE indicator of whether the dgamlss_bs() output was orthogonalized or not.}
+
+\item{basis_sizes}{Vector of number of basis functions for each spline. Must be length 4.}
+
+\item{verbose}{TRUE/FALSE for verbosity.}
+
+\item{...}{Additional arguments to be passed to the underlying GAMLSS fitting function.}
 }
 \value{
-List of initial coefficients pulled from the local_gamlss object. Since the local_gamlss design matrix may be singular even if the pooled design matrix would not be, NAs are substituted by 0s.
+List of initial values
 }
 \description{
-Get initial values based on running gamlss on the coordinating site data.
+Central site: Get initial values based on running gamlss on the central site data.
 }
 \examples{
 \dontrun{
-data(abdom)
-site1_data <- abdom[1:110, ]
-site2_data <- abdom[111:610, ]
-site_data <- list(site1_data, site2_data)
-site1_gamlss <- gamlss(mu.formula = y ~ x1 + x2, sigma.formula = ~ x1,
-nu.formula = ~ 1, tau.formula = ~ 1, family = BCT, data = site1_data)
-initial_values <- dgamlss_get_inits(site1_gamlss)
-}
+inits <- dgamlss_get_inits(mu.formula, sigma.formula, nu.formula, tau.formula,
+family, weights, contrasts, local_site_data, all_inits,
+penalty_matrix_list, is_orthogonal, basis_sizes, verbose, ...)}
 }

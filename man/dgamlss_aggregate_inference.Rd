@@ -2,7 +2,7 @@
 % Please edit documentation in R/dgamlss_aggregate_inference.R
 \name{dgamlss_aggregate_inference}
 \alias{dgamlss_aggregate_inference}
-\title{Aggregate inference across sites}
+\title{Central site: Aggregate inference across sites}
 \usage{
 dgamlss_aggregate_inference(
   site_list,
@@ -24,7 +24,7 @@ dgamlss_aggregate_inference(
 List containing pooled Hessian, effective degrees of freedom, and overall number of samples.
 }
 \description{
-Aggregate inference across sites
+Central site: Aggregate inference across sites
 }
 \examples{
 \dontrun{

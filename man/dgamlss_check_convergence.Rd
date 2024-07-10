@@ -2,7 +2,7 @@
 % Please edit documentation in R/dgamlss_check_convergence.R
 \name{dgamlss_check_convergence}
 \alias{dgamlss_check_convergence}
-\title{Check convergence of GAMLSS model updates}
+\title{Central site: Check convergence of GAMLSS model updates}
 \usage{
 dgamlss_check_convergence(current_update, previous_update, coef_crit = 0.05)
 }
@@ -17,7 +17,7 @@ dgamlss_check_convergence(current_update, previous_update, coef_crit = 0.05)
 TRUE if all coefficients have converged, FALSE otherwise.
 }
 \description{
-Check convergence of GAMLSS model updates
+Central site: Check convergence of GAMLSS model updates
 }
 \examples{
 # Simulate current and previous updates

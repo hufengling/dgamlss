@@ -2,7 +2,7 @@
 % Please edit documentation in R/dgamlss_centiles.R
 \name{dgamlss_centiles}
 \alias{dgamlss_centiles}
-\title{Plot GAMLSS centiles}
+\title{Central site: Plot GAMLSS centiles}
 \usage{
 dgamlss_centiles(
   obj,
@@ -81,7 +81,7 @@ dgamlss_centiles(
 Creates centile plot.
 }
 \description{
-Plot GAMLSS centiles
+Central site: Plot GAMLSS centiles
 }
 \examples{
 \dontrun{

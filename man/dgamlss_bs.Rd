@@ -2,7 +2,7 @@
 % Please edit documentation in R/dgamlss_bs.R
 \name{dgamlss_bs}
 \alias{dgamlss_bs}
-\title{Generate B-spline basis matrix}
+\title{Local site: Generate B-spline basis matrix}
 \usage{
 dgamlss_bs(
   x,
@@ -36,10 +36,10 @@ dgamlss_bs(
 \item{orthogonalize}{Whether to get spline representation where intercept is orthogonal to the non-linear representations. Can only be used with fixed effect splines or fixed penalty splines. Cannot be used with empirically penalized splines.}
 }
 \value{
-A design matrix containing the B-spline basis functions evaluated at the input values.
+A design matrix containing the B-spline basis functions evaluated at the input values. Communication object: Send "all_knots" attribute to local site to use as "knot_positions". Or send all arguments passed, other than x.
 }
 \description{
-Generate B-spline basis matrix
+Local site: Generate B-spline basis matrix
 }
 \examples{
 # Generate example data

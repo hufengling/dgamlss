@@ -2,7 +2,7 @@
 % Please edit documentation in R/dgamlss_fitted_plot.R
 \name{dgamlss_fitted_plot}
 \alias{dgamlss_fitted_plot}
-\title{Produce fitted plot of dgamlss_create_summary() output, similar to fittedPlot()}
+\title{Central site: Produce fitted plot of dgamlss_create_summary() output, similar to fittedPlot()}
 \usage{
 dgamlss_fitted_plot(
   object,
@@ -30,7 +30,7 @@ dgamlss_fitted_plot(
 Plot of fitted curves for one variable
 }
 \description{
-Produce fitted plot of dgamlss_create_summary() output, similar to fittedPlot()
+Central site: Produce fitted plot of dgamlss_create_summary() output, similar to fittedPlot()
 }
 \examples{
 \dontrun{
@@ -42,8 +42,6 @@ pooled_hess <- dgamlss_aggregate_hessian(list(site1_hess, site2_hess))
 
 fina_coef_list <- list(mu.coef = c(10, 1, 2), sigma.coef = c(4, 3),
 nu.coef = 2, tau.coef = 3) # Declared based on series of last_updates
-pooled_coefs <- dgamlss_pooled_coefs(current_coef_list, n_communications,
-last_update$deviance)
 summary_object <- dgamlss_create_summary(site1_gamlss, pooled_coefs,
 pooled_hess, pooled_n)
 dgamlss_fitted_plot(summary_object)

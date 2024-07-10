@@ -9,16 +9,22 @@
 #' @param weights Optional weights for likelihood analysis.
 #' @param contrasts Optional contrasts for model parameters.
 #' @param local_site_data Data from central site. Used to set up initial values for some GAMLSS distributions.
-#' #' @param all_inits Optional named list containing initial values for all coefficients.
+#' @param all_inits Optional named list containing initial values for all coefficients.
 #' @param penalty_matrix_list Named list of penalty matrices, output from dgamlss_bs(). Names must be "mu", "sigma", "nu", and "tau".
 #' @param is_orthogonal TRUE/FALSE indicator of whether the dgamlss_bs() output was orthogonalized or not.
+#' @param basis_sizes Vector of number of basis functions for each spline. Must be length 4.
 #' @param verbose TRUE/FALSE for verbosity.
 #' @param ... Additional arguments to be passed to the underlying GAMLSS fitting function.
 #'
-#' @return
+#' @importFrom stats formula
+#' @return List of initial values
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' inits <- dgamlss_get_inits(mu.formula, sigma.formula, nu.formula, tau.formula,
+#' family, weights, contrasts, local_site_data, all_inits,
+#' penalty_matrix_list, is_orthogonal, basis_sizes, verbose, ...)}
 dgamlss_get_inits <- function(mu.formula,
                               sigma.formula = "~ 1",
                               nu.formula = "~ 1",

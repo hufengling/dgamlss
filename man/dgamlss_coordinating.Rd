@@ -2,7 +2,7 @@
 % Please edit documentation in R/dgamlss_coordinating.R
 \name{dgamlss_coordinating}
 \alias{dgamlss_coordinating}
-\title{Simulation coordinating function for distributed GAMLSS model fitting}
+\title{Simulation: End-to-end coordinating function for distributed GAMLSS model fitting with fixed effect or fixed penalty smooths.}
 \usage{
 dgamlss_coordinating(
   mu.formula,
@@ -19,6 +19,7 @@ dgamlss_coordinating(
   lambda_list = NULL,
   penalty_matrix_list = NULL,
   is_orthogonal = FALSE,
+  basis_sizes = NULL,
   verbose = FALSE,
   ...
 )
@@ -38,7 +39,7 @@ dgamlss_coordinating(
 
 \item{contrasts}{Optional contrasts for model parameters.}
 
-\item{local_site_data}{Data from coordinating site. Used to set up initial values for some GAMLSS distributions.}
+\item{local_site_data}{Data from central site. Used to set up initial values for some GAMLSS distributions.}
 
 \item{site_data}{List of data frames containing local datasets.}
 
@@ -52,9 +53,11 @@ dgamlss_coordinating(
 
 \item{is_orthogonal}{TRUE/FALSE indicator of whether the dgamlss_bs() output was orthogonalized or not.}
 
+\item{basis_sizes}{Vector of number of basis functions for each spline. Must be length 4.}
+
 \item{verbose}{TRUE/FALSE for verbosity.
 
-Simulates dgamlss fitting between a coordinating site and all local sites. Only summary statistics are passed from local sites. The coordinating site then aggregates local summary statistics and sends back pooled updates.}
+Simulates dgamlss fitting between a central site and all local sites. Only summary statistics are passed from local sites. The central site then aggregates local summary statistics and sends back pooled updates.}
 
 \item{...}{Additional arguments to be passed to the underlying GAMLSS fitting function.}
 }
@@ -62,7 +65,7 @@ Simulates dgamlss fitting between a coordinating site and all local sites. Only 
 A list containing pooled coefficients, number of communications, number of reduced updates, and global deviance.
 }
 \description{
-Simulation coordinating function for distributed GAMLSS model fitting
+Simulation: End-to-end coordinating function for distributed GAMLSS model fitting with fixed effect or fixed penalty smooths.
 }
 \examples{
 

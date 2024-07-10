@@ -6,6 +6,7 @@
 #' @param pooled_inference Output from dgamlss_aggregate_inference().
 #' @param spline_prefix Named list containing spline prefices. Names must be "mu", "sigma", "nu", and "tau", depending on which parameters include splines.
 #'
+#' @importFrom stats cov2cor
 #' @return A summary object of the distributed GAMLSS model which can be run through dgamlss_summary() and dgamlss_fitted_plot()
 #' @export
 #'
@@ -27,8 +28,7 @@ dgamlss_create_summary <- function(local_gamlss,
                                    pooled_coefs,
                                    global_deviance,
                                    pooled_inference,
-                                   spline_prefix = NULL,
-                                   is_orthogonal = FALSE) {
+                                   spline_prefix = NULL) {
   dgamlss_calculate_vcov <- function(pooled_coefs, pooled_hessian) {
     coefs <- pooled_coefs$mu_coefs
 
@@ -128,7 +128,7 @@ dgamlss_create_summary <- function(local_gamlss,
     summary_out$spline_prefix <- spline_prefix
   }
 
-  summary_out$is_orthogonal <- is_orthogonal
+  #summary_out$is_orthogonal <- is_orthogonal
 
   return(summary_out)
 }

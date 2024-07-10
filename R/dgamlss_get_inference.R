@@ -4,6 +4,7 @@
 #' @param penalized_parameters String vector containing names of parameters that are to be penalized. X^TX matrices from relevant parameters will be generated.
 #' @param pooled_coefs Named list of final pooled coefficients. Names must be "mu", "sigma", "nu", "tau".
 #'
+#' @import stats
 #' @return Communication object: List containing local Hessian, local X^TX matrix for relevant penalized parameters, and local sample size.
 #' @export
 #'

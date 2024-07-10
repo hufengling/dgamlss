@@ -19,6 +19,8 @@
 #' @import gamlss.data
 #' @import survival
 #' @importFrom methods is
+#' @import stats
+#'
 #' @return Communication object: Summary statistics for the site that should be sent to the central site. Central site can aggregate dgamlss_RS outputs using dgamlss_aggregate_coef()
 #' @export
 #'
@@ -46,7 +48,7 @@ dgamlss_RS <- function(formula = formula(data),
                        data,
                        weights = NULL, # for weighted likelihood analysis
                        contrasts = NULL, # one type of contrasts for all parameters
-                       dgamlss.update = dgamlss.update(),
+                       dgamlss.update,
                        get_penalty_metric = NULL,
                        proposed_coef_list = NULL,
                        control = gamlss.control(),

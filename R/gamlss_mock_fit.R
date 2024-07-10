@@ -1,31 +1,34 @@
-#' Local Site:
+#' Local Site: Mock fit for GAMLSS
 #'
-#' @param formula
-#' @param sigma.formula
-#' @param nu.formula
-#' @param tau.formula
-#' @param family
-#' @param data
-#' @param weights
-#' @param contrasts
-#' @param method
-#' @param start.from
-#' @param mu.start
-#' @param sigma.start
-#' @param nu.start
-#' @param tau.start
-#' @param mu.fix
-#' @param sigma.fix
-#' @param nu.fix
-#' @param tau.fix
-#' @param control
-#' @param i.control
-#' @param ...
+#' @param formula See standard GAMLSS
+#' @param sigma.formula See standard GAMLSS
+#' @param nu.formula See standard GAMLSS
+#' @param tau.formula See standard GAMLSS
+#' @param family See standard GAMLSS
+#' @param data See standard GAMLSS
+#' @param weights See standard GAMLSS
+#' @param contrasts See standard GAMLSS
+#' @param method See standard GAMLSS
+#' @param start.from See standard GAMLSS
+#' @param mu.start See standard GAMLSS
+#' @param sigma.start See standard GAMLSS
+#' @param nu.start See standard GAMLSS
+#' @param tau.start See standard GAMLSS
+#' @param mu.fix See standard GAMLSS
+#' @param sigma.fix See standard GAMLSS
+#' @param nu.fix See standard GAMLSS
+#' @param tau.fix See standard GAMLSS
+#' @param control See standard GAMLSS
+#' @param i.control See standard GAMLSS
+#' @param ... See standard GAMLSS
 #'
-#' @return
+#' @import gamlss
+#' @import stats
+#' @return Mock GAMLSS object with formatted outputs from GAMLSS, but without fitted coefficients.
 #' @export
 #'
 #' @examples
+#' \dontrun{See standard gamlss() function}
 gamlss_mock_fit <- function(formula = formula(data),
                             sigma.formula = ~1,
                             nu.formula = ~1,

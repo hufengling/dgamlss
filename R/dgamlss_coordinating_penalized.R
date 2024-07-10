@@ -16,12 +16,14 @@
 #' @param method Option to use either GAIC or GCV for automated penalty selection.
 #' @param k GAIC multiplier for automated penalty selection. AIC uses k = 2. BIC uses k = log(n). Higher k corresponds to stronger penalty.
 #' @param is_orthogonal TRUE/FALSE indicator of whether the dgamlss_bs() output was orthogonalized or not.
+#' @param basis_sizes Vector of number of basis functions for each spline. Must be length 4.
 #' @param verbose TRUE/FALSE for verbosity.
 #' @param ... Additional arguments to be passed to the underlying GAMLSS fitting function.
 #'
 #' Simulates dgamlss fitting between a central site and all local sites. Only summary statistics are passed from local sites. The central site then aggregates local summary statistics and sends back pooled updates.
 #'
 #' @import gamlss
+#' @importFrom stats formula
 #' @return A list containing pooled coefficients, number of communications, number of reduced updates, and global deviance.
 #' @export
 #'

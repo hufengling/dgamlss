@@ -7,6 +7,9 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' dgamlss_predict(dgamlss_output, local_object
+#' }
 dgamlss_predict <- function(dgamlss_object, local_object) {
   gamlss_family <- as.gamlss.family(dgamlss_object$family[1])
   dgamlss_object$y <- local_object$y

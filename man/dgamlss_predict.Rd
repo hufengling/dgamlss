@@ -19,6 +19,6 @@ dGAMLSS predictions
 }
 \examples{
 \dontrun{
-dgamlss_predict(dgamlss_output, local_object
+dgamlss_predict(dgamlss_output, local_object)
 }
 }

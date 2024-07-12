@@ -7,6 +7,6 @@ Authors@R:
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
 Encoding: UTF-8
-Imports: gamlss, survival, gamlss.dist, gamlss.data, methods
+Imports: gamlss, survival, gamlss.dist, gamlss.data, methods, ggplot2
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3

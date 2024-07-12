@@ -45,6 +45,7 @@ dgamlss_predict <- function(dgamlss_object, local_object) {
 #' @param new_tau.x Matrix or data frame containing columns corresponding to dgamlss coefficients for tau parameter. See above.
 #' @param centiles Desired percentiles to plot. Default (0.4, 2, 10, 25, 50, 75, 90, 98, 99.6)
 #'
+#' @import ggplot2
 #' @return Predicted centiles from dgamlss coefficients using new data with fixed categorical variables.
 #' @export
 #'
@@ -61,6 +62,10 @@ dgamlss_centiles <- function(dgamlss_object,
                              new_tau.x = NULL,
                              centiles = c(0.4, 2, 10, 25, 50, 75, 90, 98, 99.6)) {
   gamlss_family <- as.gamlss.family(dgamlss_object$family[1])
+
+  if (length(centiles) == 0) {
+    stop("Must specify at least one centile")
+  }
 
   if (!is.null(local_object)) {
     new_mu.x <- local_object$mu.x
@@ -87,10 +92,8 @@ dgamlss_centiles <- function(dgamlss_object,
     tau.fv = if ("tau" %in% dgamlss_object$parameters) {
       gamlss_family$tau.linkinv(new_tau.x %*% dgamlss_object$tau.coefficients)})
 
-  pFamily <- match.fun(paste0("p", gamlss_family$family[1]))
   qFamily <- match.fun(paste0("q", gamlss_family$family[1]))
 
-  browser()
   dgamlss_prediction$centiles <- vector("list", length(centiles))
   for (i in 1:length(centiles)) {
     dgamlss_prediction$centiles[[i]] <- cbind(x = continuous_var[centile_order],

@@ -112,7 +112,6 @@ dgamlss_coordinating <- function(mu.formula,
 
   old_update <- new_update
   old_outer_update <- new_update
-  browser()
 
   # Outer iteration ===========================================================
   while(TRUE) {

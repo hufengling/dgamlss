@@ -62,7 +62,8 @@ dgamlss_aggregate_coef <- function(site_list,
       return(list(proposed_coef_list = proposed_coef_list,
                   lambda_vec = lambda_vec))
     } else {
-      return(solve(Reduce("+", xtwx_list) + fixed_lambda * penalty_matrix) %*% Reduce("+", xtwy_list))
+      return(list(coef = solve(Reduce("+", xtwx_list) + fixed_lambda * penalty_matrix) %*% Reduce("+", xtwy_list),
+                  deviance = Reduce("+", deviance_list)))
     }
   }
 

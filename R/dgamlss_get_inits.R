@@ -60,10 +60,12 @@ dgamlss_get_inits <- function(mu.formula,
     tau_coef_init <- all_inits$tau
   } else {
     if (!is_orthogonal) {
-      if (!is.null(basis_sizes)) {
+      if (!is.null(penalty_matrix_list)) {
+        repeat_init <- lapply(penalty_matrix_list$smooth_index_list, sum) # If basis is not orthogonal, every basis element contributes to Intercept term
+      } else if (!is.null(basis_sizes)) {
         repeat_init <- list(mu = basis_sizes[1], sigma = basis_sizes[2], nu = basis_sizes[3], tau = basis_sizes[4])
       } else {
-        repeat_init <- lapply(penalty_matrix_list$smooth_index_list, sum) # If basis is not orthogonal, every basis element contributes to Intercept term
+        stop("Must provide basis_sizes (for fixed effect smooth) or penalty_matrix_list (for fixed penalty smooth)")
       }
     } else {
       repeat_init <- lapply(penalty_matrix_list$smooth_index_list, \(x) {1}) # If basis is orthogonal, initial value only pertains to Intercept

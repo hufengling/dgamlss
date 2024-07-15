@@ -13,7 +13,7 @@
 #' dgamlss_aggregate_inference(site_list, pooled_coef, lambda_list, penalty_matrix_list)
 #' }
 dgamlss_aggregate_inference <- function(site_list,
-                                        pooled_coefs,
+                                        pooled_coefs = NULL,
                                         lambda_list = NULL,
                                         penalty_matrix_list = NULL) {
   n_sites <- length(site_list)
@@ -56,41 +56,49 @@ dgamlss_aggregate_inference <- function(site_list,
   }
   if ("mu" %in% penalized_parameters) {
     xtxinvxtx <- solve(Reduce("+", xtx_list$mu) + lambda_list$mu * penalty_matrix_list$mu) %*% Reduce("+", xtx_list$mu)
-    edf_list$mu <- sum(diag(xtxinvxtx))#2 * sum(diag(xtxinvxtx)) - sum(diag(xtxinvxtx %*% t(xtxinvxtx)))
+    edf_list$mu <- sum(diag(xtxinvxtx)) #2 * sum(diag(xtxinvxtx)) - sum(diag(xtxinvxtx %*% t(xtxinvxtx)))
 
     # gcv_list$mu <- Reduce("+", rss_list$mu) * pooled_n / (pooled_n - sum(diag(xtxinvxtx)))^2
   } else {
-    edf_list$mu <- length(pooled_coefs$mu)
+    if (!is.null(pooled_coefs)) {
+      edf_list$mu <- length(pooled_coefs$mu)
+    }
     # gcv_list$mu <- NULL
   }
 
   if ("sigma" %in% penalized_parameters) {
     xtxinvxtx <- solve(Reduce("+", xtx_list$sigma) + lambda_list$sigma * penalty_matrix_list$sigma) %*% Reduce("+", xtx_list$sigma)
-    edf_list$sigma <- 2 * sum(diag(xtxinvxtx)) - sum(diag(xtxinvxtx %*% t(xtxinvxtx)))
+    edf_list$sigma <- sum(diag(xtxinvxtx)) #2 * sum(diag(xtxinvxtx)) - sum(diag(xtxinvxtx %*% t(xtxinvxtx)))
 
     # gcv_list$sigma <- Reduce("+", rss_list$sigma) * pooled_n / (pooled_n - sum(diag(xtxinvxtx)))^2
   } else {
-    edf_list$sigma <- length(pooled_coefs$sigma)
+    if (!is.null(pooled_coefs)) {
+      edf_list$sigma <- length(pooled_coefs$sigma)
+    }
     # gcv_list$sigma <- NULL
   }
 
   if ("nu" %in% penalized_parameters) {
     xtxinvxtx <- solve(Reduce("+", xtx_list$nu) + lambda_list$nu * penalty_matrix_list$nu) %*% Reduce("+", xtx_list$nu)
-    edf_list$nu <- 2 * sum(diag(xtxinvxtx)) - sum(diag(xtxinvxtx %*% t(xtxinvxtx)))
+    edf_list$nu <- sum(diag(xtxinvxtx)) #2 * sum(diag(xtxinvxtx)) - sum(diag(xtxinvxtx %*% t(xtxinvxtx)))
 
     # gcv_list$nu <- Reduce("+", rss_list$nu) * pooled_n / (pooled_n - sum(diag(xtxinvxtx)))^2
   } else {
-    edf_list$nu <- length(pooled_coefs$nu)
+    if (!is.null(pooled_coefs)) {
+      edf_list$nu <- length(pooled_coefs$nu)
+    }
     # gcv_list$nu <- NULL
   }
 
   if ("tau" %in% penalized_parameters) {
     xtxinvxtx <- solve(Reduce("+", xtx_list$tau) + lambda_list$tau * penalty_matrix_list$tau) %*% Reduce("+", xtx_list$tau)
-    edf_list$tau <- 2 * sum(diag(xtxinvxtx)) - sum(diag(xtxinvxtx %*% t(xtxinvxtx)))
+    edf_list$tau <- sum(diag(xtxinvxtx)) #2 * sum(diag(xtxinvxtx)) - sum(diag(xtxinvxtx %*% t(xtxinvxtx)))
 
     # gcv_list$tau <- Reduce("+", rss_list$tau) * pooled_n / (pooled_n - sum(diag(xtxinvxtx)))^2
   } else {
-    edf_list$tau <- length(pooled_coefs$tau)
+    if (!is.null(pooled_coefs)) {
+      edf_list$tau <- length(pooled_coefs$tau)
+    }
     # gcv_list$tau <- NULL
   }
 

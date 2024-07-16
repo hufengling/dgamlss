@@ -151,5 +151,6 @@ dgamlss_centiles <- function(dgamlss_object,
 
   centile_plot <- ggplot(centiles_df, aes(x, pred, color = fct_rev(centile))) +
     geom_line()
-  return(centile_plot)
+  return(list(plot = centile_plot,
+              df = centiles_df))
 }

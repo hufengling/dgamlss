@@ -43,7 +43,7 @@ dgamlss_get_inits <- function(mu.formula,
     print("Running local GAMLSS to initialize coefficients")
   }
 
-  local_gamlss <- gamlss_mock_fit(formula = formula(mu.formula),
+  local_gamlss <- gamlss(formula = formula(mu.formula),
                          sigma.formula = formula(sigma.formula),
                          nu.formula = formula(nu.formula),
                          tau.formula = formula(tau.formula),

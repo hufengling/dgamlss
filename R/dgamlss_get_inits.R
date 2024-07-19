@@ -43,15 +43,15 @@ dgamlss_get_inits <- function(mu.formula,
     print("Running local GAMLSS to initialize coefficients")
   }
 
-  local_gamlss <- gamlss(formula = formula(mu.formula),
-                         sigma.formula = formula(sigma.formula),
-                         nu.formula = formula(nu.formula),
-                         tau.formula = formula(tau.formula),
-                         family = family,
-                         weights = weights,
-                         data = local_site_data,
-                         control = gamlss.control(trace = verbose),
-                         ...)
+  local_gamlss <- gamlss_mock_fit(formula = formula(mu.formula),
+                                  sigma.formula = formula(sigma.formula),
+                                  nu.formula = formula(nu.formula),
+                                  tau.formula = formula(tau.formula),
+                                  family = family,
+                                  weights = weights,
+                                  data = local_site_data,
+                                  control = gamlss.control(trace = verbose),
+                                  ...)
   # Initialize coefficients ====================================================
   if (!is.null(all_inits)) {
     mu_coef_init <- all_inits$mu

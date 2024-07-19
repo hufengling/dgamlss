@@ -73,23 +73,23 @@ dgamlss_get_inits <- function(mu.formula,
 
     gamlss_family <- as.gamlss.family(family)
     mu_coef_init <- c(rep(gamlss_family$mu.linkfun(mean(local_gamlss$y)), repeat_init$mu),
-                      rep(0, length(attr(local_gamlss$mu.terms, "variables")) - repeat_init$mu))
+                      rep(0, length(attr(local_gamlss$mu.terms, "variables")) - 2 - repeat_init$mu))
     y <- local_gamlss$y
     if ("sigma" %in% names(gamlss_family$parameters)) {
       sigma_coef_init <- c(rep(gamlss_family$sigma.linkfun(eval(gamlss_family$sigma.initial))[1], repeat_init$sigma),
-                           rep(0, length(attr(local_gamlss$sigma.terms, "variables")) - repeat_init$sigma))
+                           rep(0, length(attr(local_gamlss$sigma.terms, "variables")) - 2 - repeat_init$sigma))
     } else {
       sigma_coef_init <- NULL
     }
     if ("nu" %in% names(gamlss_family$parameters)) {
       nu_coef_init <- c(rep(gamlss_family$nu.linkfun(eval(gamlss_family$nu.initial))[1], repeat_init$nu),
-                        rep(0, length(attr(local_gamlss$nu.terms, "variables")) - repeat_init$nu))
+                        rep(0, length(attr(local_gamlss$nu.terms, "variables")) - 2 - repeat_init$nu))
     } else {
       nu_coef_init <- NULL
     }
     if ("tau" %in% names(gamlss_family$parameters)) {
       tau_coef_init <- c(rep(gamlss_family$tau.linkfun(eval(gamlss_family$tau.initial))[1], repeat_init$tau),
-                         rep(0, length(attr(local_gamlss$tau.terms, "variables")) - repeat_init$tau))
+                         rep(0, length(attr(local_gamlss$tau.terms, "variables")) - 2 - repeat_init$tau))
     } else {
       tau_coef_init <- NULL
     }

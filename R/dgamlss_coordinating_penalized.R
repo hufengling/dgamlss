@@ -122,7 +122,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                           sigma.formula = formula(sigma.formula),
                                           nu.formula = formula(nu.formula),
                                           tau.formula = formula(tau.formula),
-                                          family = BCPE(),
+                                          family = family,
                                           data = site),
                           penalized_parameters = names(penalty_matrix_list[-length(penalty_matrix_list)]))
   })

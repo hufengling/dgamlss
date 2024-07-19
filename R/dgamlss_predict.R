@@ -117,27 +117,27 @@ dgamlss_centiles <- function(dgamlss_object,
 
   dgamlss_prediction$centiles <- vector("list", length(centiles))
   for (i in 1:length(centiles)) {
-    if (length(dgamlss_object$parameter) == 1) {
+    if (length(dgamlss_object$parameters) == 1) {
       dgamlss_prediction$centiles[[i]] <- cbind(
         x = continuous_var[centile_order],
         pred = qFamily(centiles[i] / 100, dgamlss_prediction$mu.fv)[centile_order],
         centile = centiles[i])
     }
-    if (length(dgamlss_object$parameter) == 2) {
+    if (length(dgamlss_object$parameters) == 2) {
       dgamlss_prediction$centiles[[i]] <- cbind(
         x = continuous_var[centile_order],
         pred = qFamily(centiles[i] / 100, dgamlss_prediction$mu.fv,
                        dgamlss_prediction$sigma.fv)[centile_order],
         centile = centiles[i])
     }
-    if (length(dgamlss_object$parameter) == 3) {
+    if (length(dgamlss_object$parameters) == 3) {
       dgamlss_prediction$centiles[[i]] <- cbind(
         x = continuous_var[centile_order],
         pred = qFamily(centiles[i] / 100, dgamlss_prediction$mu.fv, dgamlss_prediction$sigma.fv,
                        dgamlss_prediction$nu.fv)[centile_order],
         centile = centiles[i])
     }
-    if (length(dgamlss_object$parameter) == 4) {
+    if (length(dgamlss_object$parameters) == 4) {
       dgamlss_prediction$centiles[[i]] <- cbind(
         x = continuous_var[centile_order],
         pred = qFamily(centiles[i] / 100, dgamlss_prediction$mu.fv, dgamlss_prediction$sigma.fv,

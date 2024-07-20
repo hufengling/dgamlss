@@ -158,7 +158,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                               penalty_matrix = penalty_matrix_list$mu)
         n_communications <- n_communications + 1
         site_ssr_list <- lapply(site_data, return_one_site, update = new_update,
-                                get_penalty_metric = TRUE, proposed_coef_list = proposed_mu$proposed_coef_list)
+                                get_penalty_metric = method, proposed_coef_list = proposed_mu$proposed_coef_list)
         new_mu <- dgamlss_select_lambda(proposed_mu$lambda_vec, proposed_mu$proposed_coef_list,
                                         site_ssr_list, xtx_list$xtx_mu, penalty_matrix_list$mu,
                                         method = method, pooled_n = n,
@@ -209,7 +209,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                                    penalty_matrix = penalty_matrix_list$sigma)
           n_communications <- n_communications + 1
           site_ssr_list <- lapply(site_data, return_one_site, update = new_update,
-                                  get_penalty_metric = TRUE, proposed_coef_list = proposed_sigma$proposed_coef_list)
+                                  get_penalty_metric = method, proposed_coef_list = proposed_sigma$proposed_coef_list)
           new_sigma <- dgamlss_select_lambda(proposed_sigma$lambda_vec, proposed_sigma$proposed_coef_list,
                                              site_ssr_list, xtx_list$xtx_sigma, penalty_matrix_list$sigma,
                                              method = method, pooled_n = n,
@@ -254,7 +254,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                                 penalty_matrix = penalty_matrix_list$nu)
           n_communications <- n_communications + 1
           site_ssr_list <- lapply(site_data, return_one_site, update = new_update,
-                                  get_penalty_metric = TRUE, proposed_coef_list = proposed_nu$proposed_coef_list)
+                                  get_penalty_metric = method, proposed_coef_list = proposed_nu$proposed_coef_list)
           new_nu <- dgamlss_select_lambda(proposed_nu$lambda_vec, proposed_nu$proposed_coef_list,
                                           site_ssr_list, xtx_list$xtx_nu, penalty_matrix_list$nu,
                                           method = method, pooled_n = n,
@@ -299,7 +299,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                                  penalty_matrix = penalty_matrix_list$tau)
           n_communications <- n_communications + 1
           site_ssr_list <- lapply(site_data, return_one_site, update = new_update,
-                                  get_penalty_metric = TRUE, proposed_coef_list = proposed_tau$proposed_coef_list)
+                                  get_penalty_metric = method, proposed_coef_list = proposed_tau$proposed_coef_list)
           new_tau <- dgamlss_select_lambda(proposed_tau$lambda_vec, proposed_tau$proposed_coef_list,
                                            site_ssr_list, xtx_list$xtx_tau, penalty_matrix_list$tau,
                                            method = method, pooled_n = n,

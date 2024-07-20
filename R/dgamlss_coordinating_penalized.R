@@ -101,6 +101,8 @@ dgamlss_coordinating_penalized <- function(mu.formula,
   nu_coefs <- inits$nu
   tau_coefs <- inits$tau
 
+  edf_vec <- rep(NA, 4)
+
   new_update <- dgamlss_send_coefs("mu",
                                    mu_coefs,
                                    sigma_coefs,
@@ -164,6 +166,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                         method = method, pooled_n = n,
                                         k = k)
         mu_coefs <- proposed_mu$proposed_coef_list[[new_mu$index]]
+        edf_vec[1] <- new_mu$edf_opt
       } else {
         new_mu <- dgamlss_aggregate_coef(site_info)
         mu_coefs <- new_mu$coef
@@ -215,6 +218,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                              method = method, pooled_n = n,
                                              k = k)
           sigma_coefs <- proposed_sigma$proposed_coef_list[[new_sigma$index]]
+          edf_vec[2] <- new_sigma$edf_opt
         } else {
           new_sigma <- dgamlss_aggregate_coef(site_info)
           sigma_coefs <- new_sigma$coef
@@ -260,6 +264,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                           method = method, pooled_n = n,
                                           k = k)
           nu_coefs <- proposed_nu$proposed_coef_list[[new_nu$index]]
+          edf_vec[3] <- new_nu$edf_opt
         } else {
           new_nu <- dgamlss_aggregate_coef(site_info)
           nu_coefs <- new_nu$coef
@@ -305,6 +310,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                            method = method, pooled_n = n,
                                            k = k)
           tau_coefs <- proposed_tau$proposed_coef_list[[new_tau$index]]
+          edf_vec[4] <- new_tau$edf_opt
         } else {
           new_tau <- dgamlss_aggregate_coef(site_info)
           tau_coefs <- new_tau$coef
@@ -335,6 +341,5 @@ dgamlss_coordinating_penalized <- function(mu.formula,
               n_communications = n_communications,
               n_reduced = n_reduced,
               global_deviance = global_deviance,
-              edf_vec = c(new_mu$edf_opt, new_sigma$edf_opt,
-                          new_nu$edf_opt, new_tau$edf_opt)))
+              edf_vec = edf_vec))
 }

@@ -146,6 +146,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
     n_reduced <- n_reduced + 1
     is_updated <- FALSE
     new_update$to_update <- "mu"
+    iter <- 0
     while(!dgamlss_check_convergence(new_update,
                                      old_update,
                                      coef_crit = coef_crit) | !is_updated) {
@@ -153,6 +154,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
         print("Updating mu")
       }
 
+      iter <- iter + 1
       n_communications <- n_communications + 1
       site_info <- lapply(site_data, return_one_site, update = new_update)
       if ("mu" %in% names(penalty_matrix_list)) {
@@ -184,6 +186,9 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                        nu_coefs,
                                        tau_coefs)
       is_updated <- TRUE
+      if (iter > max_iter) {
+        break
+      }
     }
     global_deviance <- new_mu$deviance
 
@@ -198,6 +203,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
       n_reduced <- n_reduced + 1
       is_updated <- FALSE
       new_update$to_update <- "sigma"
+      iter <- 0
       while(!dgamlss_check_convergence(new_update,
                                        old_update,
                                        coef_crit = coef_crit) | !is_updated) {
@@ -205,6 +211,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
           print("Updating sigma")
         }
 
+        iter <- iter + 1
         n_communications <- n_communications + 1
         site_info <- lapply(site_data, return_one_site, update = new_update)
         if ("sigma" %in% names(penalty_matrix_list)) {
@@ -235,6 +242,9 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                          nu_coefs,
                                          tau_coefs)
         is_updated <- TRUE
+        if (iter > max_iter) {
+          break
+        }
       }
       global_deviance <- new_sigma$deviance
     }
@@ -244,6 +254,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
       n_reduced <- n_reduced + 1
       is_updated <- FALSE
       new_update$to_update <- "nu"
+      iter <- 0
       while(!dgamlss_check_convergence(new_update,
                                        old_update,
                                        coef_crit = coef_crit) | !is_updated) {
@@ -251,6 +262,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
           print("Updating nu")
         }
 
+        iter <- iter + 1
         n_communications <- n_communications + 1
         site_info <- lapply(site_data, return_one_site, update = new_update)
         if ("nu" %in% names(penalty_matrix_list)) {
@@ -281,6 +293,9 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                          nu_coefs,
                                          tau_coefs)
         is_updated <- TRUE
+        if (iter > max_iter) {
+          break
+        }
       }
       global_deviance <- new_nu$deviance
     }
@@ -290,6 +305,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
       n_reduced <- n_reduced + 1
       is_updated <- FALSE
       new_update$to_update <- "tau"
+      iter <- 0
       while(!dgamlss_check_convergence(new_update,
                                        old_update,
                                        coef_crit = coef_crit) | !is_updated) {
@@ -297,6 +313,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
           print("Updating tau")
         }
 
+        iter <- iter + 1
         n_communications <- n_communications + 1
         site_info <- lapply(site_data, return_one_site, update = new_update)
         if ("tau" %in% names(penalty_matrix_list)) {
@@ -327,6 +344,9 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                          nu_coefs,
                                          tau_coefs)
         is_updated <- TRUE
+        if (iter > max_iter) {
+          break
+        }
       }
       global_deviance <- new_tau$deviance
     }

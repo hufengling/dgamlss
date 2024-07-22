@@ -51,6 +51,7 @@ dgamlss_coordinating <- function(mu.formula,
                                  site_data,
                                  all_inits = NULL,
                                  coef_crit = 0.01,
+                                 max_iter = 30,
                                  lambda_list = NULL,
                                  penalty_matrix_list = NULL,
                                  is_orthogonal = FALSE,
@@ -123,13 +124,14 @@ dgamlss_coordinating <- function(mu.formula,
     n_reduced <- n_reduced + 1
     is_updated <- FALSE
     new_update$to_update <- "mu"
+    iter <- 0
     while(!dgamlss_check_convergence(new_update,
                                      old_update,
                                      coef_crit = coef_crit) | !is_updated) {
       if (verbose) {
         print("Updating mu")
       }
-
+      iter <- iter + 1
       n_communications <- n_communications + 1
       # if ("mu" %in% edf_to_get) {
       #   site_info <- lapply(site_data, return_one_site, update = new_update,
@@ -157,6 +159,9 @@ dgamlss_coordinating <- function(mu.formula,
                                        nu_coefs,
                                        tau_coefs)
       is_updated <- TRUE
+      if (iter > max_iter) {
+        break
+      }
     }
     global_deviance <- new_mu$deviance
 
@@ -171,6 +176,7 @@ dgamlss_coordinating <- function(mu.formula,
       n_reduced <- n_reduced + 1
       is_updated <- FALSE
       new_update$to_update <- "sigma"
+      iter <- 0
       while(!dgamlss_check_convergence(new_update,
                                        old_update,
                                        coef_crit = coef_crit) | !is_updated) {
@@ -178,6 +184,7 @@ dgamlss_coordinating <- function(mu.formula,
           print("Updating sigma")
         }
 
+        iter <- iter + 1
         n_communications <- n_communications + 1
         # if ("sigma" %in% edf_to_get) {
         #   site_info <- lapply(site_data, return_one_site, update = new_update,
@@ -205,6 +212,9 @@ dgamlss_coordinating <- function(mu.formula,
                                          nu_coefs,
                                          tau_coefs)
         is_updated <- TRUE
+        if (iter > max_iter) {
+          break
+        }
       }
       global_deviance <- new_sigma$deviance
     }
@@ -214,6 +224,7 @@ dgamlss_coordinating <- function(mu.formula,
       n_reduced <- n_reduced + 1
       is_updated <- FALSE
       new_update$to_update <- "nu"
+      iter <- 0
       while(!dgamlss_check_convergence(new_update,
                                        old_update,
                                        coef_crit = coef_crit) | !is_updated) {
@@ -221,6 +232,7 @@ dgamlss_coordinating <- function(mu.formula,
           print("Updating nu")
         }
 
+        iter <- iter + 1
         n_communications <- n_communications + 1
         # if ("nu" %in% edf_to_get) {
         #   site_info <- lapply(site_data, return_one_site, update = new_update,
@@ -248,6 +260,9 @@ dgamlss_coordinating <- function(mu.formula,
                                          nu_coefs,
                                          tau_coefs)
         is_updated <- TRUE
+        if (iter > max_iter) {
+          break
+        }
       }
       global_deviance <- new_nu$deviance
     }
@@ -257,6 +272,7 @@ dgamlss_coordinating <- function(mu.formula,
       n_reduced <- n_reduced + 1
       is_updated <- FALSE
       new_update$to_update <- "tau"
+      iter <- 0
       while(!dgamlss_check_convergence(new_update,
                                        old_update,
                                        coef_crit = coef_crit) | !is_updated) {
@@ -264,6 +280,7 @@ dgamlss_coordinating <- function(mu.formula,
           print("Updating tau")
         }
 
+        iter <- iter + 1
         n_communications <- n_communications + 1
         # if ("tau" %in% edf_to_get) {
         #   site_info <- lapply(site_data, return_one_site, update = new_update,
@@ -291,6 +308,9 @@ dgamlss_coordinating <- function(mu.formula,
                                          nu_coefs,
                                          tau_coefs)
         is_updated <- TRUE
+        if (iter > max_iter) {
+          break
+        }
       }
       global_deviance <- new_tau$deviance
     }

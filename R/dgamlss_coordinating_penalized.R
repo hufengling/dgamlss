@@ -51,7 +51,8 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                            site_data,
                                            all_inits = NULL,
                                            coef_crit = 0.01,
-                                           max_iter = 30,
+                                           max_inner_iter = 20,
+                                           max_outer_iter = 10,
                                            lambda_list = NULL,
                                            penalty_matrix_list = NULL,
                                            method = c("GAIC", "GCV"),
@@ -140,6 +141,9 @@ dgamlss_coordinating_penalized <- function(mu.formula,
   # Outer iteration ===========================================================
   while(TRUE) {
     outer_iter <- outer_iter + 1
+    if (outer_iter > max_outer_iter) {
+      break
+    }
     if (verbose) {
       print(paste("Outer", outer_iter))
     }
@@ -147,7 +151,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
     n_reduced <- n_reduced + 1
     is_updated <- FALSE
     new_update$to_update <- "mu"
-    iter <- 0
+    inner_iter <- 0
     while(!dgamlss_check_convergence(new_update,
                                      old_update,
                                      coef_crit = coef_crit) | !is_updated) {
@@ -155,7 +159,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
         print("Updating mu")
       }
 
-      iter <- iter + 1
+      inner_iter <- inner_iter + 1
       n_communications <- n_communications + 1
       site_info <- lapply(site_data, return_one_site, update = new_update)
       if ("mu" %in% names(penalty_matrix_list)) {
@@ -187,7 +191,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                        nu_coefs,
                                        tau_coefs)
       is_updated <- TRUE
-      if (iter > max_iter) {
+      if (inner_iter > max_inner_iter) {
         break
       }
     }
@@ -204,7 +208,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
       n_reduced <- n_reduced + 1
       is_updated <- FALSE
       new_update$to_update <- "sigma"
-      iter <- 0
+      inner_iter <- 0
       while(!dgamlss_check_convergence(new_update,
                                        old_update,
                                        coef_crit = coef_crit) | !is_updated) {
@@ -212,7 +216,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
           print("Updating sigma")
         }
 
-        iter <- iter + 1
+        inner_iter <- inner_iter + 1
         n_communications <- n_communications + 1
         site_info <- lapply(site_data, return_one_site, update = new_update)
         if ("sigma" %in% names(penalty_matrix_list)) {
@@ -243,7 +247,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                          nu_coefs,
                                          tau_coefs)
         is_updated <- TRUE
-        if (iter > max_iter) {
+        if (inner_iter > max_inner_iter) {
           break
         }
       }
@@ -255,7 +259,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
       n_reduced <- n_reduced + 1
       is_updated <- FALSE
       new_update$to_update <- "nu"
-      iter <- 0
+      inner_iter <- 0
       while(!dgamlss_check_convergence(new_update,
                                        old_update,
                                        coef_crit = coef_crit) | !is_updated) {
@@ -263,7 +267,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
           print("Updating nu")
         }
 
-        iter <- iter + 1
+        inner_iter <- inner_iter + 1
         n_communications <- n_communications + 1
         site_info <- lapply(site_data, return_one_site, update = new_update)
         if ("nu" %in% names(penalty_matrix_list)) {
@@ -294,7 +298,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                          nu_coefs,
                                          tau_coefs)
         is_updated <- TRUE
-        if (iter > max_iter) {
+        if (inner_iter > max_inner_iter) {
           break
         }
       }
@@ -306,7 +310,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
       n_reduced <- n_reduced + 1
       is_updated <- FALSE
       new_update$to_update <- "tau"
-      iter <- 0
+      inner_iter <- 0
       while(!dgamlss_check_convergence(new_update,
                                        old_update,
                                        coef_crit = coef_crit) | !is_updated) {
@@ -314,7 +318,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
           print("Updating tau")
         }
 
-        iter <- iter + 1
+        inner_iter <- inner_iter + 1
         n_communications <- n_communications + 1
         site_info <- lapply(site_data, return_one_site, update = new_update)
         if ("tau" %in% names(penalty_matrix_list)) {
@@ -345,7 +349,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                          nu_coefs,
                                          tau_coefs)
         is_updated <- TRUE
-        if (iter > max_iter) {
+        if (inner_iter > max_inner_iter) {
           break
         }
       }

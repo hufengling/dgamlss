@@ -142,7 +142,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
   while(TRUE) {
     outer_iter <- outer_iter + 1
     if (outer_iter > max_outer_iter) {
-      break
+      return(NULL)
     }
     if (verbose) {
       print(paste("Outer", outer_iter))

@@ -104,6 +104,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
   tau_coefs <- inits$tau
 
   edf_vec <- rep(NA, 4)
+  lambda_vec <- rep(NA, 4)
 
   new_update <- dgamlss_send_coefs("mu",
                                    mu_coefs,
@@ -174,6 +175,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                         k = k)
         mu_coefs <- proposed_mu$proposed_coef_list[[new_mu$index]]
         edf_vec[1] <- new_mu$edf_opt
+        lambda_vec[1] <- new_mu$lambda_opt
       } else {
         new_mu <- dgamlss_aggregate_coef(site_info)
         mu_coefs <- new_mu$coef
@@ -181,7 +183,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
 
       if (verbose) {
         print(mu_coefs)
-        print(new_mu$deviance)
+        print(new_mu$gaic_opt)
       }
 
       old_update <- new_update
@@ -195,7 +197,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
         break
       }
     }
-    global_deviance <- new_mu$deviance
+    global_deviance <- new_mu$gaic_opt
 
     if (dgamlss_check_convergence(new_update,
                                   old_outer_update,
@@ -231,13 +233,14 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                              k = k)
           sigma_coefs <- proposed_sigma$proposed_coef_list[[new_sigma$index]]
           edf_vec[2] <- new_sigma$edf_opt
+          lambda_vec[2] <- new_sigma$lambda_opt
         } else {
           new_sigma <- dgamlss_aggregate_coef(site_info)
           sigma_coefs <- new_sigma$coef
         }
         if (verbose) {
           print(sigma_coefs)
-          print(new_sigma$deviance)
+          print(new_sigma$gaic_opt)
         }
 
         old_update <- new_update
@@ -251,7 +254,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
           break
         }
       }
-      global_deviance <- new_sigma$deviance
+      global_deviance <- new_sigma$gaic_opt
     }
 
     # Update nu ==============================================================================================================
@@ -282,13 +285,14 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                           k = k)
           nu_coefs <- proposed_nu$proposed_coef_list[[new_nu$index]]
           edf_vec[3] <- new_nu$edf_opt
+          lambda_vec[3] <- new_nu$lambda_opt
         } else {
           new_nu <- dgamlss_aggregate_coef(site_info)
           nu_coefs <- new_nu$coef
         }
         if (verbose) {
           print(nu_coefs)
-          print(new_nu$deviance)
+          print(new_nu$gaic_opt)
         }
 
         old_update <- new_update
@@ -302,7 +306,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
           break
         }
       }
-      global_deviance <- new_nu$deviance
+      global_deviance <- new_nu$gaic_opt
     }
 
     # Update tau ====================================================================================================
@@ -333,13 +337,14 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                            k = k)
           tau_coefs <- proposed_tau$proposed_coef_list[[new_tau$index]]
           edf_vec[4] <- new_tau$edf_opt
+          lambda_vec[4] <- new_tau$lambda_opt
         } else {
           new_tau <- dgamlss_aggregate_coef(site_info)
           tau_coefs <- new_tau$coef
         }
         if (verbose) {
           print(tau_coefs)
-          print(new_tau$deviance)
+          print(new_tau$gaic_opt)
         }
 
         old_update <- new_update
@@ -353,7 +358,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
           break
         }
       }
-      global_deviance <- new_tau$deviance
+      global_deviance <- new_tau$gaic_opt
     }
 
     old_outer_update <- new_update
@@ -366,5 +371,6 @@ dgamlss_coordinating_penalized <- function(mu.formula,
               n_communications = n_communications,
               n_reduced = n_reduced,
               global_deviance = global_deviance,
-              edf_vec = edf_vec))
+              edf_vec = edf_vec,
+              lambda_vec = lambda_vec))
 }

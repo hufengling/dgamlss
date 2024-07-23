@@ -98,7 +98,7 @@ dgamlss_create_summary <- function(local_gamlss,
   summary_out$vcov <- dgamlss_calculate_vcov(pooled_coefs, pooled_inference$pooled_hessian)
   summary_out$method <- "distributed RS()"
 
-  summary_out$mu.df <- min(length(pooled_coefs$mu_coefs), pooled_inference$edf_list$mu)
+  summary_out$mu.df <- min(length(pooled_coefs$mu_coefs), pooled_inference$edf_vec$mu)
   summary_out$sigma.df <- min(length(pooled_coefs$sigma_coefs), pooled_inference$edf_list$sigma)
   summary_out$nu.df <- min(length(pooled_coefs$nu_coefs), pooled_inference$edf_list$nu)
   summary_out$tau.df <- min(length(pooled_coefs$tau_coefs), pooled_inference$edf_list$tau)

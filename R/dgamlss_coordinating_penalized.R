@@ -364,6 +364,9 @@ dgamlss_coordinating_penalized <- function(mu.formula,
     old_outer_update <- new_update
   }
 
+  site_info <- lapply(site_data, return_one_site, update = new_update)
+  global_deviance <- dgamlss_aggregate_coef(site_info)$deviance
+
   return(list(mu_coefs = new_update$mu.coef,
               sigma_coefs = new_update$sigma.coef,
               nu_coefs = new_update$nu.coef,

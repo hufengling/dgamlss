@@ -74,7 +74,7 @@ dgamlss_summary <- function(object,
       # smooth.table <- cbind(spline_edf, F_stat, F_p)
       # dimnames(smooth.table) <- list(paste0("bs(", object$spline_prefix[["mu"]], "terms)"),
       #                                c("Smooth df", "F value", "Pr(>F)"))
-      smooth.table <- spline_edf
+      smooth.table <- cbind(spline_edf)
       dimnames(smooth.table) <- list(paste0("bs(", object$spline_prefix[["mu"]], "terms)"),
                                      c("Smooth df"))
 
@@ -116,7 +116,7 @@ dgamlss_summary <- function(object,
       # smooth.table <- cbind(spline_edf, F_stat, F_p)
       # dimnames(smooth.table) <- list(paste0("bs(", object$spline_prefix[["sigma"]], "terms)"),
       #                                c("Smooth df", "F value", "Pr(>F)"))
-      smooth.table <- spline_edf
+      smooth.table <- cbind(spline_edf)
       dimnames(smooth.table) <- list(paste0("bs(", object$spline_prefix[["sigma"]], "terms)"),
                                      c("Smooth df"))
 
@@ -156,7 +156,7 @@ dgamlss_summary <- function(object,
       # smooth.table <- cbind(spline_edf, F_stat, F_p)
       # dimnames(smooth.table) <- list(paste0("bs(", object$spline_prefix[["nu"]], "terms)"),
       #                                c("Smooth df", "F value", "Pr(>F)"))
-      smooth.table <- spline_edf
+      smooth.table <- cbind(spline_edf)
       dimnames(smooth.table) <- list(paste0("bs(", object$spline_prefix[["nu"]], "terms)"),
                                      c("Smooth df"))
 
@@ -196,7 +196,7 @@ dgamlss_summary <- function(object,
       # smooth.table <- cbind(spline_edf, F_stat, F_p)
       # dimnames(smooth.table) <- list(paste0("bs(", object$spline_prefix[["tau"]], "terms)"),
       #                                c("Smooth df", "F value", "Pr(>F)"))
-      smooth.table <- spline_edf
+      smooth.table <- cbind(spline_edf)
       dimnames(smooth.table) <- list(paste0("bs(", object$spline_prefix[["tau"]], "terms)"),
                                      c("Smooth df"))
 

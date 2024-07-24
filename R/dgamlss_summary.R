@@ -83,8 +83,9 @@ dgamlss_summary <- function(object,
       cat("\n")
       cat("Significance of fixed-effect smooth terms:")
       cat("\n")
-      printCoefmat(smooth.table, digits = digits, signif.stars = TRUE,
-                   P.values = TRUE, has.Pvalue = TRUE)
+      # printCoefmat(smooth.table, digits = digits, signif.stars = TRUE,
+      #              P.values = TRUE, has.Pvalue = TRUE)
+      printCoefmat(smooth.table, digits = digits)
     } else {
       printCoefmat(coef.table[p1, , drop = FALSE], digits = digits, signif.stars = TRUE)
     }
@@ -125,8 +126,9 @@ dgamlss_summary <- function(object,
       cat("\n")
       cat("Significance of fixed-effect smooth terms:")
       cat("\n")
-      printCoefmat(smooth.table, digits = digits, signif.stars = TRUE,
-                   P.values = TRUE, has.Pvalue = TRUE)
+      # printCoefmat(smooth.table, digits = digits, signif.stars = TRUE,
+      #              P.values = TRUE, has.Pvalue = TRUE)
+      printCoefmat(smooth.table, digits = digits)
     } else {
       printCoefmat(coef.table[p1, , drop = FALSE], digits = digits, signif.stars = TRUE)
     }
@@ -158,15 +160,16 @@ dgamlss_summary <- function(object,
       #                                c("Smooth df", "F value", "Pr(>F)"))
       smooth.table <- cbind(spline_edf)
       dimnames(smooth.table) <- list(paste0("bs(", object$spline_prefix[["nu"]], "terms)"),
-                                     c("Smooth df"))
+                                     c("Smooth EDF"))
 
       printCoefmat(coef.table[p1[-spline_rows], , drop = FALSE],
                    digits = digits, signif.stars = TRUE)
       cat("\n")
       cat("Significance of fixed-effect smooth terms:")
       cat("\n")
-      printCoefmat(smooth.table, digits = digits, signif.stars = TRUE,
-                   P.values = TRUE, has.Pvalue = TRUE)
+      # printCoefmat(smooth.table, digits = digits, signif.stars = TRUE,
+      #              P.values = TRUE, has.Pvalue = TRUE)
+      printCoefmat(smooth.table, digits = digits)
     } else {
       printCoefmat(coef.table[p1, , drop = FALSE], digits = digits, signif.stars = TRUE)
     }
@@ -204,8 +207,9 @@ dgamlss_summary <- function(object,
       cat("\n")
       cat("Significance of fixed-effect smooth terms:")
       cat("\n")
-      printCoefmat(smooth.table, digits = digits, signif.stars = TRUE,
-                   P.values = TRUE, has.Pvalue = TRUE)
+      # printCoefmat(smooth.table, digits = digits, signif.stars = TRUE,
+      #              P.values = TRUE, has.Pvalue = TRUE)
+      printCoefmat(smooth.table, digits = digits)
     } else {
       printCoefmat(coef.table[p1, , drop = FALSE], digits = digits, signif.stars = TRUE)
     }

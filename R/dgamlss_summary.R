@@ -63,14 +63,14 @@ dgamlss_summary <- function(object,
       p1_spline_rows <- p1[spline_rows]
       spline_coefs <- matrix(coef[p1_spline_rows])
       spline_edf <- object$mu.df - (pm - length(spline_coefs))
-      spline_vcov <- covmat$vcov[p1_spline_rows, p1_spline_rows]
-      if (object$is_orthogonal == FALSE) {
-        spline_edf <- spline_edf - 1
-        F_stat <- (t(spline_coefs - mean(spline_coefs)) %*% solve(spline_vcov) %*% (spline_coefs - mean(spline_coefs))) / spline_edf
-      } else if (object$is_orthogonal) {
-        F_stat <- (t(spline_coefs) %*% solve(spline_vcov) %*% spline_coefs) / spline_edf #* (object$df.residual - length(spline_coefs)) / (object$df.residual - 1)
-      }
-      F_p <- pf(F_stat, spline_edf, object$df.residual, lower.tail = F)
+      # spline_vcov <- covmat$vcov[p1_spline_rows, p1_spline_rows]
+      # if (object$is_orthogonal == FALSE) {
+      #   spline_edf <- spline_edf - 1
+      #   F_stat <- (t(spline_coefs - mean(spline_coefs)) %*% solve(spline_vcov) %*% (spline_coefs - mean(spline_coefs))) / spline_edf
+      # } else if (object$is_orthogonal) {
+      #   F_stat <- (t(spline_coefs) %*% solve(spline_vcov) %*% spline_coefs) / spline_edf #* (object$df.residual - length(spline_coefs)) / (object$df.residual - 1)
+      # }
+      # F_p <- pf(F_stat, spline_edf, object$df.residual, lower.tail = F)
       # smooth.table <- cbind(spline_edf, F_stat, F_p)
       # dimnames(smooth.table) <- list(paste0("bs(", object$spline_prefix[["mu"]], "terms)"),
       #                                c("Smooth df", "F value", "Pr(>F)"))
@@ -105,15 +105,14 @@ dgamlss_summary <- function(object,
       p1_spline_rows <- p1[spline_rows]
       spline_coefs <- matrix(coef[p1_spline_rows])
       spline_edf <- object$sigma.df - (ps - length(spline_coefs))
-      spline_vcov <- covmat$vcov[p1_spline_rows, p1_spline_rows]
-      if (object$is_orthogonal == FALSE) {
-        spline_edf <- spline_edf - 1
-        browser()
-        F_stat <- (t(spline_coefs - mean(spline_coefs)) %*% solve(spline_vcov) %*% (spline_coefs - mean(spline_coefs))) / spline_edf
-      } else if (object$is_orthogonal) {
-        F_stat <- (t(spline_coefs) %*% solve(spline_vcov) %*% spline_coefs) / spline_edf #* (object$df.residual - length(spline_coefs)) / (object$df.residual - 1)
-      }
-      F_p <- pf(F_stat, spline_edf, object$df.residual, lower.tail = F)
+      # spline_vcov <- covmat$vcov[p1_spline_rows, p1_spline_rows]
+      # if (object$is_orthogonal == FALSE) {
+      #   spline_edf <- spline_edf - 1
+      #   F_stat <- (t(spline_coefs - mean(spline_coefs)) %*% solve(spline_vcov) %*% (spline_coefs - mean(spline_coefs))) / spline_edf
+      # } else if (object$is_orthogonal) {
+      #   F_stat <- (t(spline_coefs) %*% solve(spline_vcov) %*% spline_coefs) / spline_edf #* (object$df.residual - length(spline_coefs)) / (object$df.residual - 1)
+      # }
+      # F_p <- pf(F_stat, spline_edf, object$df.residual, lower.tail = F)
       # smooth.table <- cbind(spline_edf, F_stat, F_p)
       # dimnames(smooth.table) <- list(paste0("bs(", object$spline_prefix[["sigma"]], "terms)"),
       #                                c("Smooth df", "F value", "Pr(>F)"))
@@ -147,13 +146,13 @@ dgamlss_summary <- function(object,
       spline_coefs <- matrix(coef[p1_spline_rows])
       spline_edf <- object$nu.df - (pn - length(spline_coefs))
       spline_vcov <- covmat$vcov[p1_spline_rows, p1_spline_rows]
-      if (object$is_orthogonal == FALSE) {
-        spline_edf <- spline_edf - 1
-        F_stat <- (t(spline_coefs - mean(spline_coefs)) %*% solve(spline_vcov) %*% (spline_coefs - mean(spline_coefs))) / spline_edf
-      } else if (object$is_orthogonal) {
-        F_stat <- (t(spline_coefs) %*% solve(spline_vcov) %*% spline_coefs) / spline_edf #* (object$df.residual - length(spline_coefs)) / (object$df.residual - 1)
-      }
-      F_p <- pf(F_stat, spline_edf, object$df.residual, lower.tail = F)
+      # if (object$is_orthogonal == FALSE) {
+      #   spline_edf <- spline_edf - 1
+      #   F_stat <- (t(spline_coefs - mean(spline_coefs)) %*% solve(spline_vcov) %*% (spline_coefs - mean(spline_coefs))) / spline_edf
+      # } else if (object$is_orthogonal) {
+      #   F_stat <- (t(spline_coefs) %*% solve(spline_vcov) %*% spline_coefs) / spline_edf #* (object$df.residual - length(spline_coefs)) / (object$df.residual - 1)
+      # }
+      # F_p <- pf(F_stat, spline_edf, object$df.residual, lower.tail = F)
       # smooth.table <- cbind(spline_edf, F_stat, F_p)
       # dimnames(smooth.table) <- list(paste0("bs(", object$spline_prefix[["nu"]], "terms)"),
       #                                c("Smooth df", "F value", "Pr(>F)"))
@@ -186,14 +185,14 @@ dgamlss_summary <- function(object,
       p1_spline_rows <- p1[spline_rows]
       spline_coefs <- matrix(coef[p1_spline_rows])
       spline_edf <- object$tau.df - (pt - length(spline_coefs))
-      spline_vcov <- covmat$vcov[p1_spline_rows, p1_spline_rows]
-      if (object$is_orthogonal == FALSE) {
-        spline_edf <- spline_edf - 1
-        F_stat <- (t(spline_coefs - mean(spline_coefs)) %*% solve(spline_vcov) %*% (spline_coefs - mean(spline_coefs))) / spline_edf
-      } else if (object$is_orthogonal) {
-        F_stat <- (t(spline_coefs) %*% solve(spline_vcov) %*% spline_coefs) / spline_edf #* (object$df.residual - length(spline_coefs)) / (object$df.residual - 1)
-      }
-      F_p <- pf(F_stat, spline_edf, object$df.residual, lower.tail = F)
+      # spline_vcov <- covmat$vcov[p1_spline_rows, p1_spline_rows]
+      # if (object$is_orthogonal == FALSE) {
+      #   spline_edf <- spline_edf - 1
+      #   F_stat <- (t(spline_coefs - mean(spline_coefs)) %*% solve(spline_vcov) %*% (spline_coefs - mean(spline_coefs))) / spline_edf
+      # } else if (object$is_orthogonal) {
+      #   F_stat <- (t(spline_coefs) %*% solve(spline_vcov) %*% spline_coefs) / spline_edf #* (object$df.residual - length(spline_coefs)) / (object$df.residual - 1)
+      # }
+      # F_p <- pf(F_stat, spline_edf, object$df.residual, lower.tail = F)
       # smooth.table <- cbind(spline_edf, F_stat, F_p)
       # dimnames(smooth.table) <- list(paste0("bs(", object$spline_prefix[["tau"]], "terms)"),
       #                                c("Smooth df", "F value", "Pr(>F)"))

@@ -119,6 +119,7 @@ dgamlss_coordinating <- function(mu.formula,
   while(TRUE) {
     outer_iter <- outer_iter + 1
     if (outer_iter > max_outer_iter) {
+      warning("Max outer iteration reached. Consider increasing max_outer_iter. Returning NULL.")
       return(NULL)
     }
     if (verbose) {
@@ -164,6 +165,7 @@ dgamlss_coordinating <- function(mu.formula,
                                        tau_coefs)
       is_updated <- TRUE
       if (inner_iter > max_inner_iter) {
+        warning("Max inner iteration reached. Check for alternating coefficient updates. Moving on to next parameter update.")
         break
       }
     }
@@ -217,6 +219,7 @@ dgamlss_coordinating <- function(mu.formula,
                                          tau_coefs)
         is_updated <- TRUE
         if (inner_iter > max_inner_iter) {
+          warning("Max inner iteration reached. Check for alternating coefficient updates. Moving on to next parameter update.")
           break
         }
       }
@@ -265,6 +268,7 @@ dgamlss_coordinating <- function(mu.formula,
                                          tau_coefs)
         is_updated <- TRUE
         if (inner_iter > max_inner_iter) {
+          warning("Max inner iteration reached. Check for alternating coefficient updates. Moving on to next parameter update.")
           break
         }
       }
@@ -313,6 +317,7 @@ dgamlss_coordinating <- function(mu.formula,
                                          tau_coefs)
         is_updated <- TRUE
         if (inner_iter > max_inner_iter) {
+          warning("Max inner iteration reached. Check for alternating coefficient updates. Moving on to next parameter update.")
           break
         }
       }

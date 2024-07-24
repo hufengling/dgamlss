@@ -52,7 +52,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                            all_inits = NULL,
                                            coef_crit = 0.01,
                                            max_inner_iter = 20,
-                                           max_outer_iter = 10,
+                                           max_outer_iter = 20,
                                            lambda_list = NULL,
                                            penalty_matrix_list = NULL,
                                            method = c("GAIC", "GCV"),
@@ -143,6 +143,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
   while(TRUE) {
     outer_iter <- outer_iter + 1
     if (outer_iter > max_outer_iter) {
+      warning("Max outer iteration reached. Consider increasing max_outer_iter. Returning NULL.")
       return(NULL)
     }
     if (verbose) {
@@ -165,7 +166,8 @@ dgamlss_coordinating_penalized <- function(mu.formula,
       site_info <- lapply(site_data, return_one_site, update = new_update)
       if ("mu" %in% names(penalty_matrix_list)) {
         proposed_mu <- dgamlss_aggregate_coef(site_info,
-                                              penalty_matrix = penalty_matrix_list$mu)
+                                              penalty_matrix = penalty_matrix_list$mu,
+                                              central_lambda = lambda_vec[1])
         n_communications <- n_communications + 1
         site_ssr_list <- lapply(site_data, return_one_site, update = new_update,
                                 get_penalty_metric = method, proposed_coef_list = proposed_mu$proposed_coef_list)
@@ -194,6 +196,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                        tau_coefs)
       is_updated <- TRUE
       if (inner_iter > max_inner_iter) {
+        warning("Max inner iteration reached. Check for alternating coefficient updates. Moving on to next parameter update.")
         break
       }
     }
@@ -223,7 +226,8 @@ dgamlss_coordinating_penalized <- function(mu.formula,
         site_info <- lapply(site_data, return_one_site, update = new_update)
         if ("sigma" %in% names(penalty_matrix_list)) {
           proposed_sigma <- dgamlss_aggregate_coef(site_info,
-                                                   penalty_matrix = penalty_matrix_list$sigma)
+                                                   penalty_matrix = penalty_matrix_list$sigma,
+                                                   central_lambda = lambda_vec[2])
           n_communications <- n_communications + 1
           site_ssr_list <- lapply(site_data, return_one_site, update = new_update,
                                   get_penalty_metric = method, proposed_coef_list = proposed_sigma$proposed_coef_list)
@@ -251,6 +255,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                          tau_coefs)
         is_updated <- TRUE
         if (inner_iter > max_inner_iter) {
+          warning("Max inner iteration reached. Check for alternating coefficient updates. Moving on to next parameter update.")
           break
         }
       }
@@ -275,7 +280,8 @@ dgamlss_coordinating_penalized <- function(mu.formula,
         site_info <- lapply(site_data, return_one_site, update = new_update)
         if ("nu" %in% names(penalty_matrix_list)) {
           proposed_nu <- dgamlss_aggregate_coef(site_info,
-                                                penalty_matrix = penalty_matrix_list$nu)
+                                                penalty_matrix = penalty_matrix_list$nu,
+                                                central_lambda = lambda_vec[3])
           n_communications <- n_communications + 1
           site_ssr_list <- lapply(site_data, return_one_site, update = new_update,
                                   get_penalty_metric = method, proposed_coef_list = proposed_nu$proposed_coef_list)
@@ -303,6 +309,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                          tau_coefs)
         is_updated <- TRUE
         if (inner_iter > max_inner_iter) {
+          warning("Max inner iteration reached. Check for alternating coefficient updates. Moving on to next parameter update.")
           break
         }
       }
@@ -327,7 +334,8 @@ dgamlss_coordinating_penalized <- function(mu.formula,
         site_info <- lapply(site_data, return_one_site, update = new_update)
         if ("tau" %in% names(penalty_matrix_list)) {
           proposed_tau <- dgamlss_aggregate_coef(site_info,
-                                                 penalty_matrix = penalty_matrix_list$tau)
+                                                 penalty_matrix = penalty_matrix_list$tau,
+                                                 central_lambda = lambda_vec[4])
           n_communications <- n_communications + 1
           site_ssr_list <- lapply(site_data, return_one_site, update = new_update,
                                   get_penalty_metric = method, proposed_coef_list = proposed_tau$proposed_coef_list)
@@ -355,6 +363,7 @@ dgamlss_coordinating_penalized <- function(mu.formula,
                                          tau_coefs)
         is_updated <- TRUE
         if (inner_iter > max_inner_iter) {
+          warning("Max inner iteration reached. Check for alternating coefficient updates. Moving on to next parameter update.")
           break
         }
       }

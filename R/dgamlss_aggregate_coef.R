@@ -26,7 +26,7 @@
 dgamlss_aggregate_coef <- function(site_list,
                                    fixed_lambda = NULL,
                                    central_lambda = NULL,
-                                   search_type = c("coarse", "fine"),
+                                   search_type = c("fine", "coarse"),
                                    penalty_matrix = NULL) {
   search_type <- match.arg(search_type)
   n_sites <- length(site_list)
@@ -46,15 +46,15 @@ dgamlss_aggregate_coef <- function(site_list,
     }
 
     if (is.null(fixed_lambda)) {
-      if (is.null(central_lambda)) {
+      if (is.null(central_lambda) | is.na(central_lambda)) {
         #warning("Setting central_lambda to default of 10.")
         central_lambda <- 10
       }
 
       if (search_type == "fine") {
-        lambda_vec <- 10^(seq(log10(central_lambda) - 3, log10(central_lambda) + 3, by = 0.05))
+        lambda_vec <- 10^(seq(log10(central_lambda) - 3, log10(central_lambda) + 3, by = 0.1))
       } else if (search_type == "coarse") {
-        lambda_vec <- 10^(seq(log10(central_lambda) - 6, log10(central_lambda) + 6, by = 0.1))
+        lambda_vec <- 10^(seq(log10(central_lambda) - 6, log10(central_lambda) + 6, by = 0.2))
       }
 
       proposed_coef_list <- lapply(lambda_vec, \(lambda) solve(Reduce("+", xtwx_list) + lambda * penalty_matrix) %*% Reduce("+", xtwy_list))

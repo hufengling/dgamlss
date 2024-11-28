@@ -76,7 +76,7 @@ dgamlss_summary <- function(object,
       #                                c("Smooth df", "F value", "Pr(>F)"))
       smooth.table <- cbind(spline_edf)
       dimnames(smooth.table) <- list(paste0("bs(", object$spline_prefix[["mu"]], "terms)"),
-                                     c("Smooth df"))
+                                     c("Smooth EDF"))
 
       printCoefmat(coef.table[p1[-spline_rows], , drop = FALSE],
                    digits = digits, signif.stars = TRUE)
@@ -119,7 +119,7 @@ dgamlss_summary <- function(object,
       #                                c("Smooth df", "F value", "Pr(>F)"))
       smooth.table <- cbind(spline_edf)
       dimnames(smooth.table) <- list(paste0("bs(", object$spline_prefix[["sigma"]], "terms)"),
-                                     c("Smooth df"))
+                                     c("Smooth EDF"))
 
       printCoefmat(coef.table[p1[-spline_rows], , drop = FALSE],
                    digits = digits, signif.stars = TRUE)
@@ -201,7 +201,7 @@ dgamlss_summary <- function(object,
       #                                c("Smooth df", "F value", "Pr(>F)"))
       smooth.table <- cbind(spline_edf)
       dimnames(smooth.table) <- list(paste0("bs(", object$spline_prefix[["tau"]], "terms)"),
-                                     c("Smooth df"))
+                                     c("Smooth EDF"))
 
       printCoefmat(coef.table[p1[-spline_rows], , drop = FALSE], digits = digits, signif.stars = TRUE)
       cat("\n")

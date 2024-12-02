@@ -49,8 +49,7 @@ dgamlss_bs <- function(x, x_min, x_max, spline_prefix = NULL,
   }
 
   B <- splineDesign(knot_positions, x = x, outer.ok = TRUE, ord = degree + 1)
-  n <- dim(B)[2]
-  attr(B, "true_knots") <- knot_positions[-c(1:(degree - 1), (n - (degree - 2)):n)]
+  attr(B, "true_knots") <- knot_positions[-c(1:(degree - 1), (length(knot_positions) - (degree - 2)):length(knot_positions))]
   attr(B, "all_knots") <- knot_positions
 
   r <- ncol(B)

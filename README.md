@@ -31,6 +31,8 @@ We propose distributed GAMLSS (dGAMLSS), a distributed algorithm which can fit G
 
 <img width="468" alt="image" src="https://github.com/user-attachments/assets/67798915-b7b3-4ecd-a2cf-675c98b853bb" />
 
+This Figure provides an overview of the dGAMLSS algorithm which enables fitting of GAMLSS models via privacy-preserving federated learning. Fitting occurs via an outer cycle over the parameters and a nested inner cycle of Newton-Raphson updates for parameter-specific coefficients. Broadly, the algorithm is as follows. Step 1: Initialize all coefficients for all parameters and set the outer loop to the μ parameter. Step 2: For the given parameter, send current coefficients and receive site-level matrices. Step 3: Calculate coefficient updates for the given parameter. If the updated coefficients are identical to the previous coefficients, advance to the next parameter. Step 4: Repeat Steps 2 and 3 until all coefficients converge for all parameters.
+
 <div id='id-section3'/>
 
 ## 3. Software
